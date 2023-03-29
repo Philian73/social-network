@@ -1,21 +1,22 @@
 import React from 'react'
+import s from './Navbar.module.css'
 
 export const Navbar: React.FC = () => {
    return (
-      <nav className="nav">
-         <div>
+      <nav className={s.nav}>
+         <div className={`${s.item} ${s.active}`}>
             <a href="#profile">Profile</a>
          </div>
-         <div>
+         <div className={s.item}>
             <a href="#messages">Messages</a>
          </div>
-         <div>
+         <div className={s.item}>
             <a href="#news">News</a>
          </div>
-         <div>
+         <div className={s.item}>
             <a href="#music">Music</a>
          </div>
-         <div>
+         <div className={s.item}>
             <a href="#settings">Settings</a>
          </div>
       </nav>

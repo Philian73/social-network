@@ -1,8 +1,9 @@
 import React from 'react'
+import s from './Profile.module.css'
 
 export const Profile: React.FC = () => {
    return (
-      <div className="content">
+      <div className={s.content}>
          <div>
             <img src="https://i.ibb.co/CQyysgB/pexels-photo-248797.jpg" alt="wallpaper" />
          </div>
@@ -14,11 +15,11 @@ export const Profile: React.FC = () => {
             <div>
                New post
             </div>
-            <div>
-               <div>
+            <div className={s.posts}>
+               <div className={s.item}>
                   post1
                </div>
-               <div>
+               <div className={s.item}>
                   post2
                </div>
             </div>
