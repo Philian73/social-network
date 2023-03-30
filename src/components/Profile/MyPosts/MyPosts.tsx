@@ -10,8 +10,8 @@ export const MyPosts: React.FC = () => {
             New post
          </div>
          <div className={s.posts}>
-            <Post />
-            <Post />
+            <Post message="Hi, how are you?" likeCounts={15} />
+            <Post message="It's my first post" likeCounts={20} />
          </div>
       </div>
    )
