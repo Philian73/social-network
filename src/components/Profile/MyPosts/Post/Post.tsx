@@ -3,7 +3,7 @@ import s from './Post.module.css'
 
 type PostPropsType = {
    message: string
-   likeCounts?: number
+   likesCount?: number
 }
 export const Post: React.FC<PostPropsType> = props => {
    return (
@@ -12,7 +12,7 @@ export const Post: React.FC<PostPropsType> = props => {
               alt="avatar" />
          {props.message}
          <div>
-            <span>like {props.likeCounts}</span>
+            <span>like </span><span>{props.likesCount}</span>
          </div>
       </div>
    )
