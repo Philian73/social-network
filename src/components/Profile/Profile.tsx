@@ -4,7 +4,7 @@ import {MyPosts} from './MyPosts/MyPosts'
 
 export const Profile: React.FC = () => {
    return (
-      <div className={s.content}>
+      <div>
          <div>
             <img src="https://i.ibb.co/CQyysgB/pexels-photo-248797.jpg" alt="wallpaper" />
          </div>
