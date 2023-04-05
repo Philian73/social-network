@@ -1,16 +1,12 @@
 import React from 'react'
-import s from './Profile.module.css'
+// import s from './Profile.module.css'
 import {MyPosts} from './MyPosts/MyPosts'
+import {ProfileInfo} from './ProfileInfo/ProfileInfo'
 
 export const Profile: React.FC = () => {
    return (
       <div>
-         <div>
-            <img src="https://i.ibb.co/CQyysgB/pexels-photo-248797.jpg" alt="wallpaper" />
-         </div>
-         <div>
-            ava + description
-         </div>
+         <ProfileInfo />
          <MyPosts />
       </div>
    )
