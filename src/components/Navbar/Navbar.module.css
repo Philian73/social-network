@@ -1,6 +1,7 @@
 .nav {
     grid-area: nav;
     background-color: burlywood;
+    padding: 20px;
 }
 
 .item a {
@@ -8,6 +9,6 @@
     text-decoration: none;
 }
 
-.item.active a {
+.item a.active {
     color: gold;
 }
