@@ -9,7 +9,7 @@ import {News} from './components/News/News'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
 
-const App: React.FC = () => {
+const App = () => {
    return (
       <BrowserRouter>
          <div className="wrapper">

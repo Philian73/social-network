@@ -5,9 +5,9 @@ import {NavLink} from 'react-router-dom'
 type MessagePropsType = {
    message: string
 }
-const Message: React.FC<MessagePropsType> = props => {
+const Message: React.FC<MessagePropsType> = ({message}) => {
    return (
-      <div className={s.message}>{props.message}</div>
+      <div className={s.message}>{message}</div>
    )
 }
 
