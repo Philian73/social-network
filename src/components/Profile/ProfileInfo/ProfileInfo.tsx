@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './ProfileInfo.module.css'
 
-export const ProfileInfo: React.FC = () => {
+export const ProfileInfo = () => {
    return (
       <div>
          <div>

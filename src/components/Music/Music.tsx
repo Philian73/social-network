@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Music: React.FC = () => {
+export const Music = () => {
    return (
       <span>Music</span>
    )

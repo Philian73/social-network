@@ -14,19 +14,18 @@ const Message: React.FC<MessagePropsType> = ({message}) => {
 type DialogItemPropsType = {
    id: number
    name: string
-   classActive?: string
 }
-const DialogItem: React.FC<DialogItemPropsType> = props => {
-   const path: string = `/messages/${props.id}`
+const DialogItem: React.FC<DialogItemPropsType> = ({id, name}) => {
+   const path: string = `/messages/${id}`
 
    return (
       <div className={s.dialog}>
-         <NavLink activeClassName={s.active} to={path}>{props.name}</NavLink>
+         <NavLink activeClassName={s.active} to={path}>{name}</NavLink>
       </div>
    )
 }
 
-export const Messages: React.FC = () => {
+export const Messages = () => {
    return (
       <div className={s.messages}>
          <div className={s.dialogsItems}>
