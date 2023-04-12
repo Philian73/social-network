@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {FC} from 'react'
 import s from './Post.module.css'
 
 type PropsType = {
    message: string
    likesCount?: number
 }
-export const Post: React.FC<PropsType> = ({message, likesCount}) => {
+export const Post: FC<PropsType> = ({message, likesCount}) => {
    return (
       <div className={s.item}>
          <img src="https://lh3.googleusercontent.com/a/AGNmyxaFGi9-aUy1jbhPeCLVuw_DdtgJUCuv0c3ypH9uQA=s288"

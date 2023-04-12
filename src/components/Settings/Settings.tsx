@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Settings: React.FC = () => {
+export const Settings = () => {
    return (
       <span>Settings</span>
    )
