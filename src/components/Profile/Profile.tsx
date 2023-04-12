@@ -5,18 +5,16 @@ import React, {FC} from 'react'
 import {MyPosts} from './MyPosts/MyPosts'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo'
 
-import {PostType} from '../../store'
+import {ProfilePageType} from '../../state/state'
 
 type PropsType = {
-   posts: PostType[]
+   state: ProfilePageType
 }
-export const Profile: FC<PropsType> = ({posts}) => {
-
-
+export const Profile: FC<PropsType> = ({state}) => {
    return (
       <div>
          <ProfileInfo />
-         <MyPosts posts={posts} />
+         <MyPosts posts={state.posts} />
       </div>
    )
 }

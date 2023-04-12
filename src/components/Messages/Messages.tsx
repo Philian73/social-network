@@ -5,16 +5,15 @@ import s from './Messages.module.css'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 
-import {DialogType, MessageType} from '../../store'
+import {MessagesPageType} from '../../state/state'
 
 type PropsType = {
-   dialogs: DialogType[]
-   messages: MessageType[]
+   state: MessagesPageType
 }
-export const Messages: FC<PropsType> = ({dialogs, messages}) => {
-   const dialogsMap = dialogs
+export const Messages: FC<PropsType> = ({state}) => {
+   const dialogsMap = state.dialogs
       .map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
-   const messagesMap = messages
+   const messagesMap = state.messages
       .map(m => <Message key={m.id} message={m.message} />)
 
    return (
