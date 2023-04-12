@@ -8,7 +8,7 @@ type PropsType = {
 export const Post: FC<PropsType> = ({message, likesCount}) => {
    return (
       <div className={s.item}>
-         <img src="https://lh3.googleusercontent.com/a/AGNmyxaFGi9-aUy1jbhPeCLVuw_DdtgJUCuv0c3ypH9uQA=s288"
+         <img src="https://avatars.githubusercontent.com/u/69945902?s=100"
               alt="avatar" />
          {message}
          <div>
