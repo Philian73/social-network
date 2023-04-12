@@ -12,3 +12,7 @@
 .item a.active {
     color: gold;
 }
+
+.avatar {
+    max-width: 50px;
+}
