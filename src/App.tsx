@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {BrowserRouter, Route} from 'react-router-dom'
 
 import './styles/App.css'
@@ -11,15 +11,18 @@ import {News} from './components/News/News'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
 
-const App = () => {
+type PropsType = {
+   store: any
+}
+const App: FC<PropsType> = ({store}) => {
    return (
       <BrowserRouter>
          <div className="wrapper">
             <Header />
             <Navbar />
             <div className="app-wrapper-content">
-               <Route path="/profile" render={() => <Profile />} />
-               <Route path="/messages" render={() => <Messages />} />
+               <Route path="/profile" render={() => <Profile posts={store.posts} />} />
+               <Route path="/index" render={() => <Messages dialogs={store.dialogs} messages={store.messages} />} />
                <Route path="/news" render={() => <News />} />
                <Route path="/music" render={() => <Music />} />
                <Route path="/settings" render={() => <Settings />} />
