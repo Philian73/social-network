@@ -5,6 +5,11 @@ import './styles/index.css'
 
 import App from './App'
 
-import {store} from './store/store'
+import {BrowserRouter} from 'react-router-dom'
+import {state} from './state/state'
 
-ReactDOM.render(<App store={store} />, document.getElementById('root'))
+ReactDOM.render(
+   <BrowserRouter>
+      <App state={state} />
+   </BrowserRouter>,
+   document.getElementById('root'))
