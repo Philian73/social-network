@@ -5,16 +5,16 @@ import React, {FC} from 'react'
 import {MyPosts} from './MyPosts/MyPosts'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo'
 
-import {ProfilePageType} from '../../state/state'
+import {ProfilePageType} from '../../redux/state'
 
 type PropsType = {
-   state: ProfilePageType
+   profilePage: ProfilePageType
 }
-export const Profile: FC<PropsType> = ({state}) => {
+export const Profile: FC<PropsType> = ({profilePage}) => {
    return (
       <div>
          <ProfileInfo />
-         <MyPosts posts={state.posts} />
+         <MyPosts posts={profilePage.posts} />
       </div>
    )
 }

@@ -5,15 +5,15 @@ import s from './Messages.module.css'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 
-import {MessagesPageType} from '../../state/state'
+import {MessagesPageType} from '../../redux/state'
 
 type PropsType = {
-   state: MessagesPageType
+   messagesPage: MessagesPageType
 }
-export const Messages: FC<PropsType> = ({state}) => {
-   const dialogsMap = state.dialogs
+export const Messages: FC<PropsType> = ({messagesPage}) => {
+   const dialogsMap = messagesPage.dialogs
       .map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
-   const messagesMap = state.messages
+   const messagesMap = messagesPage.messages
       .map(m => <Message key={m.id} message={m.message} />)
 
    return (
