@@ -4,7 +4,7 @@ import s from './Navbar.module.css'
 
 import {NavLink} from 'react-router-dom'
 
-import {SidebarType} from '../../state/state'
+import {SidebarType} from '../../redux/state'
 
 type PropsType = {
    state: SidebarType
