@@ -7,10 +7,10 @@ import {NavLink} from 'react-router-dom'
 import {SidebarType} from '../../redux/state'
 
 type PropsType = {
-   state: SidebarType
+   sidebar: SidebarType
 }
-export const Navbar: FC<PropsType> = ({state}) => {
-   const friendsMap = state.friends.map(f => {
+export const Navbar: FC<PropsType> = ({sidebar}) => {
+   const friendsMap = sidebar.friends.map(f => {
       return (
          <div key={f.id}>
             <span>{f.nameFriend}</span>

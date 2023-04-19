@@ -20,7 +20,7 @@ const App: FC<PropsType> = ({state}) => {
    return (
       <div className="wrapper">
          <Header />
-         <Navbar state={state.sidebar} />
+         <Navbar sidebar={state.sidebar} />
          <div className="app-wrapper-content">
             <Switch>
                <Route path="/profile" render={() => <Profile profilePage={state.profilePage} />} />
