@@ -83,3 +83,13 @@ export const state: RootStateType = {
       ],
    },
 }
+
+export const addPost = (postMessage: string) => {
+   state.profilePage.posts.push(
+      {
+         id: state.profilePage.posts.length + 1,
+         message: postMessage,
+         likesCount: 0,
+      }
+   )
+}

@@ -15,15 +15,16 @@ import {RootStateType} from './redux/state'
 
 type PropsType = {
    state: RootStateType
+   addPost: (postMessage: string) => void
 }
-const App: FC<PropsType> = ({state}) => {
+const App: FC<PropsType> = ({state, addPost}) => {
    return (
       <div className="wrapper">
          <Header />
          <Navbar sidebar={state.sidebar} />
          <div className="app-wrapper-content">
             <Switch>
-               <Route path="/profile" render={() => <Profile profilePage={state.profilePage} />} />
+               <Route path="/profile" render={() => <Profile profilePage={state.profilePage} addPost={addPost} />} />
                <Route path="/messages" render={() => <Messages messagesPage={state.messagesPage} />} />
                <Route path="/news" render={() => <News />} />
                <Route path="/music" render={() => <Music />} />

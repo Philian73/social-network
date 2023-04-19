@@ -8,12 +8,16 @@ import {PostType} from '../../../redux/state'
 
 type PropsType = {
    posts: PostType[]
+   addPost: (postMessage: string) => void
 }
-export const MyPosts: FC<PropsType> = ({posts}) => {
+export const MyPosts: FC<PropsType> = ({posts, addPost}) => {
    const newPostEl = createRef<HTMLTextAreaElement>()
 
    const addPostHandler = () => {
-      alert(newPostEl.current?.value)
+      if (newPostEl.current) {
+         addPost(newPostEl.current.value)
+         newPostEl.current.value = ''
+      }
    }
 
    const postsMap = posts
