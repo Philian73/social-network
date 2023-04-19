@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {createRef, FC} from 'react'
 
 import s from './MyPosts.module.css'
 
@@ -10,6 +10,12 @@ type PropsType = {
    posts: PostType[]
 }
 export const MyPosts: FC<PropsType> = ({posts}) => {
+   const newPostEl = createRef<HTMLTextAreaElement>()
+
+   const addPostHandler = () => {
+      alert(newPostEl.current?.value)
+   }
+
    const postsMap = posts
       .map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />)
 
@@ -18,10 +24,10 @@ export const MyPosts: FC<PropsType> = ({posts}) => {
          <h3>My posts</h3>
          <div>
             <div>
-               <textarea></textarea>
+               <textarea ref={newPostEl}></textarea>
             </div>
             <div>
-               <button>Add post</button>
+               <button onClick={addPostHandler}>Add post</button>
             </div>
          </div>
          <div className={s.posts}>

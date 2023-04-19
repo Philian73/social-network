@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {createRef, FC} from 'react'
 
 import s from './Messages.module.css'
 
@@ -11,6 +11,12 @@ type PropsType = {
    messagesPage: MessagesPageType
 }
 export const Messages: FC<PropsType> = ({messagesPage}) => {
+   const newMessageEl = createRef<HTMLTextAreaElement>()
+
+   const addMessageHandler = () => {
+      alert(newMessageEl.current?.value)
+   }
+
    const dialogsMap = messagesPage.dialogs
       .map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
    const messagesMap = messagesPage.messages
@@ -22,7 +28,13 @@ export const Messages: FC<PropsType> = ({messagesPage}) => {
             {dialogsMap}
          </div>
          <div className={s.chat}>
-            {messagesMap}
+            <div>{messagesMap}</div>
+            <div>
+               <textarea ref={newMessageEl}></textarea>
+            </div>
+            <div>
+               <button onClick={addMessageHandler}>Send</button>
+            </div>
          </div>
       </div>
    )
