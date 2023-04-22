@@ -1,4 +1,4 @@
-import React, {ChangeEvent, createRef, FC} from 'react'
+import React, {ChangeEvent, FC} from 'react'
 
 import s from './MyPosts.module.css'
 
@@ -10,19 +10,14 @@ type PropsType = {
    posts: PostType[]
    newPostText: string
    updateNewPostText: (newText: string) => void
-   addPost: (postMessage: string) => void
+   addPost: () => void
 }
 export const MyPosts: FC<PropsType> = ({posts, newPostText, updateNewPostText, addPost}) => {
-   const newPostEl = createRef<HTMLTextAreaElement>()
-
    const addPostHandler = () => {
-      if (newPostEl.current) {
-         addPost(newPostEl.current.value)
-         newPostEl.current.value = ''
-      }
+      addPost()
    }
 
-   const postTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+   const newPostTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
       updateNewPostText(e.currentTarget.value)
    }
 
@@ -34,7 +29,7 @@ export const MyPosts: FC<PropsType> = ({posts, newPostText, updateNewPostText, a
          <h3>My posts</h3>
          <div>
             <div>
-               <textarea ref={newPostEl} onChange={postTextChangeHandler} value={newPostText} />
+               <textarea onChange={newPostTextChangeHandler} value={newPostText} />
             </div>
             <div>
                <button onClick={addPostHandler}>Add post</button>
