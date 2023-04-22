@@ -4,12 +4,12 @@ import {BrowserRouter} from 'react-router-dom'
 
 import App from './App'
 
-import {addPost, RootStateType} from './redux/state'
+import {addPost, RootStateType, updateNewPostText} from './redux/state'
 
 export const rerenderEntireThree = (state: RootStateType) => {
    ReactDOM.render(
       <BrowserRouter>
-         <App state={state} addPost={addPost} />
+         <App state={state} addPost={addPost} updateNewPostText={updateNewPostText} />
       </BrowserRouter>,
       document.getElementById('root')
    )
