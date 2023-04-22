@@ -29,6 +29,7 @@ export type MessagesPageType = {
 
 export type ProfilePageType = {
    posts: PostType[]
+   newPostText: string
 }
 
 export type SidebarType = {
@@ -47,6 +48,7 @@ export const state: RootStateType = {
          {id: 1, message: 'Hi, how are you?', likesCount: 15},
          {id: 2, message: 'It\'s my first post', likesCount: 20},
       ],
+      newPostText: '',
    },
    messagesPage: {
       dialogs: [
@@ -92,5 +94,10 @@ export const addPost = (postMessage: string) => {
       message: postMessage,
       likesCount: 0,
    })
+   rerenderEntireThree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+   state.profilePage.newPostText = newText
    rerenderEntireThree(state)
 }
