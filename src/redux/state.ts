@@ -88,12 +88,13 @@ export const state: RootStateType = {
    },
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
    state.profilePage.posts.push({
       id: state.profilePage.posts.length + 1,
-      message: postMessage,
+      message: state.profilePage.newPostText,
       likesCount: 0,
    })
+   state.profilePage.newPostText = ''
    rerenderEntireThree(state)
 }
 
