@@ -15,7 +15,7 @@ import {RootStateType, updateNewPostText} from './redux/state'
 
 type PropsType = {
    state: RootStateType
-   addPost: (postMessage: string) => void
+   addPost: () => void
    updateNewPostText: (newText: string) => void
 }
 const App: FC<PropsType> = ({state, addPost}) => {
