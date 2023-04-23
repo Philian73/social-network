@@ -21,4 +21,4 @@ const rerenderEntireTree = (state: RootStateType) => {
 
 rerenderEntireTree(state)
 
-subscribe(() => rerenderEntireTree(state))
+subscribe(rerenderEntireTree)
