@@ -1,7 +1,3 @@
-let rerenderEntireTree = (state: RootStateType) => {
-   console.log('State changed')
-}
-
 export type PostType = {
    id: number
    message: string
@@ -88,6 +84,10 @@ export const state: RootStateType = {
          },
       ],
    },
+}
+
+let rerenderEntireTree = (state: RootStateType) => {
+   console.log('State changed')
 }
 
 export const addPost = () => {
