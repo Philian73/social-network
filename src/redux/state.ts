@@ -40,6 +40,10 @@ export type RootStateType = {
    sidebar: SidebarType
 }
 
+let rerenderEntireTree = (state: RootStateType) => {
+   console.log('State changed')
+}
+
 export const state: RootStateType = {
    profilePage: {
       posts: [
@@ -84,10 +88,6 @@ export const state: RootStateType = {
          },
       ],
    },
-}
-
-let rerenderEntireTree = (state: RootStateType) => {
-   console.log('State changed')
 }
 
 export const addPost = () => {
