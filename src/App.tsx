@@ -11,14 +11,14 @@ import {News} from './components/News/News'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
 
-import {RootStateType, updateNewPostText} from './redux/state'
+import {RootStateType} from './redux/state'
 
 type PropsType = {
    state: RootStateType
    addPost: () => void
    updateNewPostText: (newText: string) => void
 }
-const App: FC<PropsType> = ({state, addPost}) => {
+const App: FC<PropsType> = ({state, addPost, updateNewPostText}) => {
    return (
       <div className="wrapper">
          <Header />
