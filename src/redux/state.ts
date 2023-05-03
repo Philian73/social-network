@@ -40,7 +40,16 @@ export type RootStateType = {
    sidebar: SidebarType
 }
 
-export const store = {
+export type StoreType = {
+   _state: RootStateType
+   getState: () => RootStateType
+   _callSubscriber: (state: RootStateType) => void
+   addPost: () => void
+   updateNewPostText: (newText: string) => void
+   subscribe: (observer: (state: RootStateType) => void) => void
+}
+
+export const store: StoreType = {
    _state: {
       profilePage: {
          posts: [
@@ -89,7 +98,7 @@ export const store = {
    getState() {
       return this._state
    },
-   _callSubscriber(state: RootStateType) {
+   _callSubscriber() {
       console.log('State changed')
    },
    addPost() {
