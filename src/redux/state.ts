@@ -40,71 +40,72 @@ export type RootStateType = {
    sidebar: SidebarType
 }
 
-let rerenderEntireTree = (state: RootStateType) => {
-   console.log('State changed')
-}
-
-export const state: RootStateType = {
-   profilePage: {
-      posts: [
-         {id: 1, message: 'Hi, how are you?', likesCount: 15},
-         {id: 2, message: 'It\'s my first post', likesCount: 20},
-      ],
-      newPostText: '',
+export const store = {
+   _state: {
+      profilePage: {
+         posts: [
+            {id: 1, message: 'Hi, how are you?', likesCount: 15},
+            {id: 2, message: 'It\'s my first post', likesCount: 20},
+         ],
+         newPostText: '',
+      },
+      messagesPage: {
+         dialogs: [
+            {id: 1, name: 'Nikolay'},
+            {id: 2, name: 'Darya'},
+            {id: 3, name: 'Nikita'},
+            {id: 4, name: 'Maxim'},
+            {id: 5, name: 'Vasiliy'},
+            {id: 6, name: 'Andrei'},
+         ],
+         messages: [
+            {id: 1, message: 'Hi'},
+            {id: 2, message: 'How are you doing?'},
+            {id: 3, message: 'See you?'},
+            {id: 4, message: 'Yo'},
+            {id: 5, message: 'Yo'},
+         ],
+      },
+      sidebar: {
+         friends: [
+            {
+               id: 1,
+               nameFriend: 'Darya',
+               avatar: 'https://avatars.mds.yandex.net/i?id=2bf8c047d61a77491675e765c2a8f65d538037fe-9182388-images-thumbs&n=13'
+            },
+            {
+               id: 2,
+               nameFriend: 'Maxim',
+               avatar: 'https://avatars.mds.yandex.net/i?id=2bf8c047d61a77491675e765c2a8f65d538037fe-9182388-images-thumbs&n=13'
+            },
+            {
+               id: 3,
+               nameFriend: 'Nikita',
+               avatar: 'https://avatars.mds.yandex.net/i?id=2bf8c047d61a77491675e765c2a8f65d538037fe-9182388-images-thumbs&n=13'
+            },
+         ],
+      },
    },
-   messagesPage: {
-      dialogs: [
-         {id: 1, name: 'Nikolay'},
-         {id: 2, name: 'Darya'},
-         {id: 3, name: 'Nikita'},
-         {id: 4, name: 'Maxim'},
-         {id: 5, name: 'Vasiliy'},
-         {id: 6, name: 'Andrei'},
-      ],
-      messages: [
-         {id: 1, message: 'Hi'},
-         {id: 2, message: 'How are you doing?'},
-         {id: 3, message: 'See you?'},
-         {id: 4, message: 'Yo'},
-         {id: 5, message: 'Yo'},
-      ],
+   getState() {
+      return this._state
    },
-   sidebar: {
-      friends: [
-         {
-            id: 1,
-            nameFriend: 'Darya',
-            avatar: 'https://avatars.mds.yandex.net/i?id=2bf8c047d61a77491675e765c2a8f65d538037fe-9182388-images-thumbs&n=13'
-         },
-         {
-            id: 2,
-            nameFriend: 'Maxim',
-            avatar: 'https://avatars.mds.yandex.net/i?id=2bf8c047d61a77491675e765c2a8f65d538037fe-9182388-images-thumbs&n=13'
-         },
-         {
-            id: 3,
-            nameFriend: 'Nikita',
-            avatar: 'https://avatars.mds.yandex.net/i?id=2bf8c047d61a77491675e765c2a8f65d538037fe-9182388-images-thumbs&n=13'
-         },
-      ],
+   _callSubscriber(state: RootStateType) {
+      console.log('State changed')
    },
-}
-
-export const addPost = () => {
-   state.profilePage.posts.push({
-      id: state.profilePage.posts.length + 1,
-      message: state.profilePage.newPostText,
-      likesCount: 0,
-   })
-   state.profilePage.newPostText = ''
-   rerenderEntireTree(state)
-}
-
-export const updateNewPostText = (newText: string) => {
-   state.profilePage.newPostText = newText
-   rerenderEntireTree(state)
-}
-
-export const subscribe = (observer: (state: RootStateType) => void) => {
-   rerenderEntireTree = observer
+   addPost() {
+      this._state.profilePage.posts.push({
+         id: this._state.profilePage.posts.length + 1,
+         message: this._state.profilePage.newPostText,
+         likesCount: 0,
+      })
+      this._state.profilePage.newPostText = ''
+      this._callSubscriber(this._state)
+   },
+   updateNewPostText(newText: string) {
+      this._state.profilePage.newPostText = newText
+      this._callSubscriber(this._state)
+   },
+   subscribe(observer: (state: RootStateType) => void) {
+      this._callSubscriber = observer
+   },
 }
