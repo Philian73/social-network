@@ -11,23 +11,20 @@ import {News} from './components/News/News'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
 
-import {RootStateType} from './redux/state'
+import {ActionsTypes, RootStateType} from './redux/state'
 
 type PropsType = {
    state: RootStateType
-   addPost: () => void
-   updateNewPostText: (newText: string) => void
+   dispatch: (action: ActionsTypes) => void
 }
-const App: FC<PropsType> = ({state, addPost, updateNewPostText}) => {
+const App: FC<PropsType> = ({state, dispatch}) => {
    return (
       <div className="wrapper">
          <Header />
          <Navbar sidebar={state.sidebar} />
          <div className="app-wrapper-content">
             <Switch>
-               <Route path="/profile" render={() => <Profile profilePage={state.profilePage}
-                                                             addPost={addPost}
-                                                             updateNewPostText={updateNewPostText} />} />
+               <Route path="/profile" render={() => <Profile profilePage={state.profilePage} dispatch={dispatch} />} />
                <Route path="/messages" render={() => <Messages messagesPage={state.messagesPage} />} />
                <Route path="/news" render={() => <News />} />
                <Route path="/music" render={() => <Music />} />
