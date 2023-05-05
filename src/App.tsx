@@ -11,11 +11,11 @@ import {News} from './components/News/News'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
 
-import {ActionsTypes, RootStateType} from './redux/state'
+import {ActionTypes, RootStateType} from './redux/state'
 
 type PropsType = {
    state: RootStateType
-   dispatch: (action: ActionsTypes) => void
+   dispatch: (action: ActionTypes) => void
 }
 const App: FC<PropsType> = ({state, dispatch}) => {
    return (
