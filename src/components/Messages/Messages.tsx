@@ -1,20 +1,22 @@
-import React, {createRef, FC} from 'react'
+import React, {ChangeEvent, FC} from 'react'
 
 import s from './Messages.module.css'
 
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 
-import {MessagesPageType} from '../../redux/state'
+import {ActionTypes, MessagesPageType, sendMessageAC, updateNewMessageBodyAC} from '../../redux/state'
 
 type PropsType = {
    messagesPage: MessagesPageType
+   dispatch: (action: ActionTypes) => void
 }
-export const Messages: FC<PropsType> = ({messagesPage}) => {
-   const newMessageEl = createRef<HTMLTextAreaElement>()
-
-   const addMessageHandler = () => {
-      alert(newMessageEl.current?.value)
+export const Messages: FC<PropsType> = ({messagesPage, dispatch}) => {
+   const onNewMessageBodyChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      dispatch(updateNewMessageBodyAC(e.currentTarget.value))
+   }
+   const onSendMessageClick = () => {
+      dispatch(sendMessageAC())
    }
 
    const dialogsMap = messagesPage.dialogs
@@ -30,10 +32,13 @@ export const Messages: FC<PropsType> = ({messagesPage}) => {
          <div className={s.chat}>
             <div>{messagesMap}</div>
             <div>
-               <textarea ref={newMessageEl}></textarea>
+               <textarea placeholder="Enter your message"
+                         value={messagesPage.newMessageBody}
+                         onChange={onNewMessageBodyChange}>
+               </textarea>
             </div>
             <div>
-               <button onClick={addMessageHandler}>Send</button>
+               <button onClick={onSendMessageClick}>Send</button>
             </div>
          </div>
       </div>
