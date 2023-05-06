@@ -24,11 +24,16 @@ const App: FC<PropsType> = ({state, dispatch}) => {
          <Navbar sidebar={state.sidebar} />
          <div className="app-wrapper-content">
             <Switch>
-               <Route path="/profile" render={() => <Profile profilePage={state.profilePage} dispatch={dispatch} />} />
-               <Route path="/messages" render={() => <Messages messagesPage={state.messagesPage} />} />
-               <Route path="/news" render={() => <News />} />
-               <Route path="/music" render={() => <Music />} />
-               <Route path="/settings" render={() => <Settings />} />
+               <Route path="/profile"
+                      render={() => <Profile profilePage={state.profilePage} dispatch={dispatch} />} />
+               <Route path="/messages"
+                      render={() => <Messages messagesPage={state.messagesPage} dispatch={dispatch} />} />
+               <Route path="/news"
+                      render={() => <News />} />
+               <Route path="/music"
+                      render={() => <Music />} />
+               <Route path="/settings"
+                      render={() => <Settings />} />
             </Switch>
          </div>
       </div>
