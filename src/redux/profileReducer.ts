@@ -1,10 +1,10 @@
-import {ActionTypes, ProfilePageType} from './state'
+import {ProfilePageType} from './state'
 
 export type ProfileActionTypes =
    ReturnType<typeof updateNewPostTextAC>
    | ReturnType<typeof addPostAC>
 
-export const profileReducer = (state: ProfilePageType, action: ActionTypes): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType, action: ProfileActionTypes): ProfilePageType => {
    switch (action.type) {
       case 'UPDATE-NEW-POST-TEXT': {
          state.newPostText = action.newText

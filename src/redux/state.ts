@@ -1,7 +1,7 @@
 import {ProfileActionTypes, profileReducer} from './profileReducer'
 import {MessagesActionTypes, messagesReducer} from './messagesReducer'
 
-export type ActionTypes = ProfileActionTypes | MessagesActionTypes
+export type ActionTypes = ProfileActionTypes & MessagesActionTypes
 
 export type PostType = {
    id: number

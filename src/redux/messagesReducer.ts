@@ -1,10 +1,10 @@
-import {ActionTypes, MessagesPageType} from './state'
+import {MessagesPageType} from './state'
 
 export type MessagesActionTypes =
    ReturnType<typeof updateNewMessageBodyAC>
    | ReturnType<typeof sendMessageAC>
 
-export const messagesReducer = (state: MessagesPageType, action: ActionTypes): MessagesPageType => {
+export const messagesReducer = (state: MessagesPageType, action: MessagesActionTypes): MessagesPageType => {
    switch (action.type) {
       case 'UPDATE-NEW-MESSAGE-BODY': {
          state.newMessageBody = action.body
