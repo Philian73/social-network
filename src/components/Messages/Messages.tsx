@@ -5,7 +5,8 @@ import s from './Messages.module.css'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 
-import {ActionTypes, MessagesPageType, sendMessageAC, updateNewMessageBodyAC} from '../../redux/state'
+import {ActionTypes, MessagesPageType} from '../../redux/state'
+import {sendMessageAC, updateNewMessageBodyAC} from '../../redux/messagesReducer'
 
 type PropsType = {
    messagesPage: MessagesPageType
