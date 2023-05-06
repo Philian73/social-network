@@ -1,7 +1,7 @@
 import {ProfileActionTypes, profileReducer} from './profileReducer'
 import {MessagesActionTypes, messagesReducer} from './messagesReducer'
 
-export type ActionTypes = ProfileActionTypes & MessagesActionTypes
+export type ActionTypes = ProfileActionTypes | MessagesActionTypes
 
 export type PostType = {
    id: number
@@ -113,8 +113,8 @@ export const store: StoreType = {
    },
 
    dispatch(action) {
-      this._state.profilePage = profileReducer(this._state.profilePage, action)
-      this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+      this._state.profilePage = profileReducer(this._state.profilePage, action as ProfileActionTypes)
+      this._state.messagesPage = messagesReducer(this._state.messagesPage, action as MessagesActionTypes)
 
       this._callSubscriber(this._state)
    },
