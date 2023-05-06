@@ -1,25 +1,7 @@
-export type ActionTypes = ReturnType<typeof updateNewPostTextAC>
-   | ReturnType<typeof addPostAC>
-   | ReturnType<typeof updateNewMessageBodyAC>
-   | ReturnType<typeof sendMessageAC>
+import {ProfileActionTypes, profileReducer} from './profileReducer'
+import {MessagesActionTypes, messagesReducer} from './messagesReducer'
 
-export const updateNewPostTextAC = (text: string) => ({
-   type: 'UPDATE-NEW-POST-TEXT',
-   newText: text
-}) as const
-
-export const addPostAC = () => ({
-   type: 'ADD-POST'
-}) as const
-
-export const updateNewMessageBodyAC = (text: string) => ({
-   type: 'UPDATE-NEW-MESSAGE-BODY',
-   body: text
-}) as const
-
-export const sendMessageAC = () => ({
-   type: 'SEND-MESSAGE'
-}) as const
+export type ActionTypes = ProfileActionTypes | MessagesActionTypes
 
 export type PostType = {
    id: number
@@ -131,27 +113,9 @@ export const store: StoreType = {
    },
 
    dispatch(action) {
-      if (action.type === 'UPDATE-NEW-POST-TEXT') {
-         this._state.profilePage.newPostText = action.newText
-         this._callSubscriber(this._state)
-      } else if (action.type === 'ADD-POST') {
-         this._state.profilePage.posts.push({
-            id: this._state.profilePage.posts.length + 1,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-         })
-         this._state.profilePage.newPostText = ''
-         this._callSubscriber(this._state)
-      } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-         this._state.messagesPage.newMessageBody = action.body
-         this._callSubscriber(this._state)
-      } else if (action.type === 'SEND-MESSAGE') {
-         this._state.messagesPage.messages.push({
-            id: this._state.messagesPage.messages.length + 1,
-            message: this._state.messagesPage.newMessageBody
-         })
-         this._state.messagesPage.newMessageBody = ''
-         this._callSubscriber(this._state)
-      }
+      this._state.profilePage = profileReducer(this._state.profilePage, action)
+      this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+
+      this._callSubscriber(this._state)
    },
 }
