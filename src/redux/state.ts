@@ -1,12 +1,24 @@
-export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+export type ActionTypes = ReturnType<typeof updateNewPostTextAC>
+   | ReturnType<typeof addPostAC>
+   | ReturnType<typeof updateNewMessageBodyAC>
+   | ReturnType<typeof sendMessageAC>
+
+export const updateNewPostTextAC = (text: string) => ({
+   type: 'UPDATE-NEW-POST-TEXT',
+   newText: text
+}) as const
 
 export const addPostAC = () => ({
    type: 'ADD-POST'
 }) as const
 
-export const updateNewPostTextAC = (text: string) => ({
-   type: 'UPDATE-NEW-POST-TEXT',
-   newText: text
+export const updateNewMessageBodyAC = (text: string) => ({
+   type: 'UPDATE-NEW-MESSAGE-BODY',
+   body: text
+}) as const
+
+export const sendMessageAC = () => ({
+   type: 'SEND-MESSAGE'
 }) as const
 
 export type PostType = {
@@ -34,6 +46,7 @@ export type FriendsType = {
 export type MessagesPageType = {
    dialogs: DialogType[]
    messages: MessageType[]
+   newMessageBody: string
 }
 
 export type ProfilePageType = {
@@ -84,6 +97,7 @@ export const store: StoreType = {
             {id: 4, message: 'Yo'},
             {id: 5, message: 'Yo'},
          ],
+         newMessageBody: ''
       },
       sidebar: {
          friends: [
@@ -117,7 +131,10 @@ export const store: StoreType = {
    },
 
    dispatch(action) {
-      if (action.type === 'ADD-POST') {
+      if (action.type === 'UPDATE-NEW-POST-TEXT') {
+         this._state.profilePage.newPostText = action.newText
+         this._callSubscriber(this._state)
+      } else if (action.type === 'ADD-POST') {
          this._state.profilePage.posts.push({
             id: this._state.profilePage.posts.length + 1,
             message: this._state.profilePage.newPostText,
@@ -125,8 +142,15 @@ export const store: StoreType = {
          })
          this._state.profilePage.newPostText = ''
          this._callSubscriber(this._state)
-      } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-         this._state.profilePage.newPostText = action.newText
+      } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
+         this._state.messagesPage.newMessageBody = action.body
+         this._callSubscriber(this._state)
+      } else if (action.type === 'SEND-MESSAGE') {
+         this._state.messagesPage.messages.push({
+            id: this._state.messagesPage.messages.length + 1,
+            message: this._state.messagesPage.newMessageBody
+         })
+         this._state.messagesPage.newMessageBody = ''
          this._callSubscriber(this._state)
       }
    },
