@@ -2,15 +2,15 @@ import React, {ChangeEvent, FC} from 'react'
 
 import s from './Messages.module.css'
 
+import {ActionsType} from '../../redux/store'
+import {MessagesPageType, sendMessageAC, updateNewMessageBodyAC} from '../../redux/messagesReducer'
+
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 
-import {ActionTypes, MessagesPageType} from '../../redux/state'
-import {sendMessageAC, updateNewMessageBodyAC} from '../../redux/messagesReducer'
-
 type PropsType = {
    messagesPage: MessagesPageType
-   dispatch: (action: ActionTypes) => void
+   dispatch: (action: ActionsType) => void
 }
 export const Messages: FC<PropsType> = ({messagesPage, dispatch}) => {
    const onNewMessageBodyChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

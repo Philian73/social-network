@@ -3,6 +3,8 @@ import {Route, Switch} from 'react-router-dom'
 
 import './styles/App.css'
 
+import {ActionsType, AppStateType} from './redux/store'
+
 import {Header} from './components/Header/Header'
 import {Navbar} from './components/Navbar/Navbar'
 import {Profile} from './components/Profile/Profile'
@@ -11,11 +13,9 @@ import {News} from './components/News/News'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
 
-import {ActionTypes, RootStateType} from './redux/state'
-
 type PropsType = {
-   state: RootStateType
-   dispatch: (action: ActionTypes) => void
+   state: AppStateType
+   dispatch: (action: ActionsType) => void
 }
 const App: FC<PropsType> = ({state, dispatch}) => {
    return (

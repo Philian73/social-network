@@ -2,9 +2,9 @@ import React, {FC} from 'react'
 
 import s from './Navbar.module.css'
 
-import {NavLink} from 'react-router-dom'
+import {SidebarType} from '../../redux/sidebarReducer'
 
-import {SidebarType} from '../../redux/state'
+import {NavLink} from 'react-router-dom'
 
 type PropsType = {
    sidebar: SidebarType
