@@ -6,6 +6,8 @@ import {sidebarReducer} from './sidebarReducer'
 
 export type ActionsType = ProfileActionsType | MessagesActionsType
 
+export type StoreType = typeof store
+
 export type AppStateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
