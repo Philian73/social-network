@@ -1,47 +1,50 @@
-import React, {FC} from 'react'
+import React from 'react'
 
 import s from './Navbar.module.css'
 
-import {SidebarType} from '../../redux/sidebarReducer'
+import {StoreContext} from '../../StoreContext'
 
 import {NavLink} from 'react-router-dom'
 
-type PropsType = {
-   sidebar: SidebarType
-}
-export const Navbar: FC<PropsType> = ({sidebar}) => {
-   const friendsMap = sidebar.friends.map(f => {
-      return (
-         <div key={f.id}>
-            <span>{f.nameFriend}</span>
-            <img className={s.avatar} src={f.avatar} alt="avatar" />
-         </div>
-      )
-   })
+export const Navbar = () => (
+   <StoreContext.Consumer>
+      {store => {
+         const state = store.getState().sidebar
+         
+         const friendsMap = state.friends.map(f => {
+            return (
+               <div key={f.id}>
+                  <span>{f.nameFriend}</span>
+                  <img className={s.avatar} src={f.avatar} alt="avatar" />
+               </div>
+            )
+         })
 
-   return (
-      <nav className={s.nav}>
-         <div className={`${s.item} ${s.active}`}>
-            <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
-         </div>
-         <div className={s.item}>
-            <NavLink to="/messages" activeClassName={s.active}>Messages</NavLink>
-         </div>
-         <div className={s.item}>
-            <NavLink to="/news" activeClassName={s.active}>News</NavLink>
-         </div>
-         <div className={s.item}>
-            <NavLink to="/music" activeClassName={s.active}>Music</NavLink>
-         </div>
-         <div className={s.item}>
-            <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
-         </div>
-         <div>
-            Friends
-         </div>
-         <div>
-            {friendsMap}
-         </div>
-      </nav>
-   )
-}
+         return (
+            <nav className={s.nav}>
+               <div className={`${s.item} ${s.active}`}>
+                  <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
+               </div>
+               <div className={s.item}>
+                  <NavLink to="/messages" activeClassName={s.active}>Messages</NavLink>
+               </div>
+               <div className={s.item}>
+                  <NavLink to="/news" activeClassName={s.active}>News</NavLink>
+               </div>
+               <div className={s.item}>
+                  <NavLink to="/music" activeClassName={s.active}>Music</NavLink>
+               </div>
+               <div className={s.item}>
+                  <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
+               </div>
+               <div>
+                  Friends
+               </div>
+               <div>
+                  {friendsMap}
+               </div>
+            </nav>
+         )
+      }}
+   </StoreContext.Consumer>
+)
