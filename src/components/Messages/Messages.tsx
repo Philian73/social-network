@@ -2,23 +2,19 @@ import React, {ChangeEvent, FC} from 'react'
 
 import s from './Messages.module.css'
 
-import {ActionsType} from '../../redux/store'
-import {MessagesPageType, sendMessageAC, updateNewMessageBodyAC} from '../../redux/messagesReducer'
+import {MessagesPageType} from '../../redux/messagesReducer'
 
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 
 type PropsType = {
    messagesPage: MessagesPageType
-   dispatch: (action: ActionsType) => void
+   updateNewMessageBody: (text: string) => void
+   sendMessage: () => void
 }
-export const Messages: FC<PropsType> = ({messagesPage, dispatch}) => {
-   const onNewMessageBodyChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-      dispatch(updateNewMessageBodyAC(e.currentTarget.value))
-   }
-   const onSendMessageClick = () => {
-      dispatch(sendMessageAC())
-   }
+export const Messages: FC<PropsType> = ({messagesPage, updateNewMessageBody, sendMessage}) => {
+   const onNewMessageBodyChange = (e: ChangeEvent<HTMLTextAreaElement>) => updateNewMessageBody(e.currentTarget.value)
+   const onSendMessageClick = () => sendMessage()
 
    const dialogsMap = messagesPage.dialogs
       .map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
