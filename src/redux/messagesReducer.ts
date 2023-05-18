@@ -1,6 +1,6 @@
-export type MessagesActionsType =
-   ReturnType<typeof updateNewMessageBodyAC>
-   | ReturnType<typeof sendMessageAC>
+import {InferActionTypes} from './store'
+
+type ActionsType = InferActionTypes<typeof actions>
 
 export type MessageType = {
    message: string
@@ -37,10 +37,10 @@ const initialState: MessagesPageType = {
    newMessageBody: ''
 }
 
-export const messagesReducer = (state = initialState, action: MessagesActionsType): MessagesPageType => {
+export const messagesReducer = (state = initialState, action: ActionsType): MessagesPageType => {
    switch (action.type) {
       case 'UPDATE-NEW-MESSAGE-BODY': {
-         state.newMessageBody = action.body
+         state.newMessageBody = action.payload.body
          return state
       }
       case 'SEND-MESSAGE': {
@@ -56,11 +56,7 @@ export const messagesReducer = (state = initialState, action: MessagesActionsTyp
    }
 }
 
-export const updateNewMessageBodyAC = (text: string) => ({
-   type: 'UPDATE-NEW-MESSAGE-BODY',
-   body: text
-}) as const
-
-export const sendMessageAC = () => ({
-   type: 'SEND-MESSAGE'
-}) as const
+export const actions = {
+   updateNewMessageBodyAC: (text: string) => ({type: 'UPDATE-NEW-MESSAGE-BODY', payload: {body: text}} as const),
+   sendMessageAC: () => ({type: 'SEND-MESSAGE'} as const)
+}

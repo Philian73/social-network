@@ -1,6 +1,6 @@
-export type ProfileActionsType =
-   ReturnType<typeof updateNewPostTextAC>
-   | ReturnType<typeof addPostAC>
+import { InferActionTypes } from './store'
+
+type ActionsType = InferActionTypes<typeof actions>
 
 export type PostType = {
    id: number
@@ -15,16 +15,16 @@ export type ProfilePageType = {
 
 const initialState: ProfilePageType = {
    posts: [
-      {id: 1, message: 'Hi, how are you?', likesCount: 15},
-      {id: 2, message: 'It\'s my first post', likesCount: 20},
+      { id: 1, message: 'Hi, how are you?', likesCount: 15 },
+      { id: 2, message: 'It\'s my first post', likesCount: 20 },
    ],
    newPostText: '',
 }
 
-export const profileReducer = (state = initialState, action: ProfileActionsType): ProfilePageType => {
+export const profileReducer = (state = initialState, action: ActionsType): ProfilePageType => {
    switch (action.type) {
       case 'UPDATE-NEW-POST-TEXT': {
-         state.newPostText = action.newText
+         state.newPostText = action.payload.newText
          return state
       }
       case 'ADD-POST': {
@@ -41,11 +41,7 @@ export const profileReducer = (state = initialState, action: ProfileActionsType)
    }
 }
 
-export const updateNewPostTextAC = (text: string) => ({
-   type: 'UPDATE-NEW-POST-TEXT',
-   newText: text
-}) as const
-
-export const addPostAC = () => ({
-   type: 'ADD-POST'
-}) as const
+export const actions = {
+   updateNewPostTextAC: (text: string) => ({ type: 'UPDATE-NEW-POST-TEXT', payload: { newText: text } } as const),
+   addPostAC: () => ({ type: 'ADD-POST' } as const)
+}
