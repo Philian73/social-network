@@ -1,10 +1,10 @@
-import {combineReducers, createStore} from 'redux'
+import { combineReducers, createStore } from 'redux'
 
-import {ProfileActionsType, profileReducer} from './profileReducer'
-import {MessagesActionsType, messagesReducer} from './messagesReducer'
-import {sidebarReducer} from './sidebarReducer'
+import { profileReducer } from './profileReducer'
+import { messagesReducer } from './messagesReducer'
+import { sidebarReducer } from './sidebarReducer'
 
-export type ActionsType = ProfileActionsType | MessagesActionsType
+export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 
 export type StoreType = typeof store
 
