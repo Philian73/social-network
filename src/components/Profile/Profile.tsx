@@ -2,15 +2,15 @@ import React from 'react'
 
 // import s from './Profile.module.css'
 
-import {ProfileInfo} from './ProfileInfo/ProfileInfo'
-import {MyPostsContainer} from './MyPosts/MyPostsContainer'
+import { ProfileInfo } from './ProfileInfo/ProfileInfo'
+import { PostsContainer } from './Posts/PostsContainer'
 
 
 export const Profile = () => {
    return (
       <div>
          <ProfileInfo />
-         <MyPostsContainer />
+         <PostsContainer />
       </div>
    )
 }
