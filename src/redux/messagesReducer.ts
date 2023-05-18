@@ -1,4 +1,4 @@
-import {InferActionTypes} from './store'
+import { InferActionTypes } from './store'
 
 type ActionsType = InferActionTypes<typeof actions>
 
@@ -12,32 +12,28 @@ export type DialogType = {
    name: string
 }
 
-export type MessagesPageType = {
-   dialogs: DialogType[]
-   messages: MessageType[]
-   newMessageBody: string
-}
+export type MessagesPageType = typeof initialState
 
-const initialState: MessagesPageType = {
+const initialState = {
    dialogs: [
-      {id: 1, name: 'Nikolay'},
-      {id: 2, name: 'Darya'},
-      {id: 3, name: 'Nikita'},
-      {id: 4, name: 'Maxim'},
-      {id: 5, name: 'Vasiliy'},
-      {id: 6, name: 'Andrei'},
-   ],
+      { id: 1, name: 'Nikolay' },
+      { id: 2, name: 'Darya' },
+      { id: 3, name: 'Nikita' },
+      { id: 4, name: 'Maxim' },
+      { id: 5, name: 'Vasiliy' },
+      { id: 6, name: 'Andrei' },
+   ] as DialogType[],
    messages: [
-      {id: 1, message: 'Hi'},
-      {id: 2, message: 'How are you doing?'},
-      {id: 3, message: 'See you?'},
-      {id: 4, message: 'Yo'},
-      {id: 5, message: 'Yo'},
-   ],
+      { id: 1, message: 'Hi' },
+      { id: 2, message: 'How are you doing?' },
+      { id: 3, message: 'See you?' },
+      { id: 4, message: 'Yo' },
+      { id: 5, message: 'Yo' },
+   ] as MessageType[],
    newMessageBody: ''
 }
 
-export const messagesReducer = (state = initialState, action: ActionsType): MessagesPageType => {
+export const messagesReducer = (state: MessagesPageType = initialState, action: ActionsType): MessagesPageType => {
    switch (action.type) {
       case 'UPDATE-NEW-MESSAGE-BODY': {
          state.newMessageBody = action.payload.body
@@ -57,6 +53,6 @@ export const messagesReducer = (state = initialState, action: ActionsType): Mess
 }
 
 export const actions = {
-   updateNewMessageBodyAC: (text: string) => ({type: 'UPDATE-NEW-MESSAGE-BODY', payload: {body: text}} as const),
-   sendMessageAC: () => ({type: 'SEND-MESSAGE'} as const)
+   updateNewMessageBodyAC: (text: string) => ({ type: 'UPDATE-NEW-MESSAGE-BODY', payload: { body: text } } as const),
+   sendMessageAC: () => ({ type: 'SEND-MESSAGE' } as const)
 }
