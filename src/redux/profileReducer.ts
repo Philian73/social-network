@@ -20,19 +20,21 @@ const initialState = {
 
 export const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
-      case 'UPDATE-NEW-POST-TEXT': {
-         state.newPostText = action.payload.newText
-         return state
-      }
-      case 'ADD-POST': {
-         state.posts.push({
-            id: state.posts.length + 1,
-            message: state.newPostText,
-            likesCount: 0,
-         })
-         state.newPostText = ''
-         return state
-      }
+      case 'UPDATE-NEW-POST-TEXT':
+         return { ...state, newPostText: action.payload.newText }
+      case 'ADD-POST':
+         if (state.newPostText.trim()) {
+            const stateCopy = {
+               ...state,
+               posts: [...state.posts, { id: state.posts.length + 1, message: state.newPostText, likesCount: 0 }]
+            }
+
+            stateCopy.newPostText = ''
+
+            return stateCopy
+         } else {
+            return state
+         }
       default:
          return state
    }

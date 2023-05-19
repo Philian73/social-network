@@ -30,23 +30,26 @@ const initialState = {
       { id: 4, message: 'Yo' },
       { id: 5, message: 'Yo' },
    ] as MessageType[],
-   newMessageBody: ''
+   newMessageBody: '',
 }
 
 export const messagesReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
-      case 'UPDATE-NEW-MESSAGE-BODY': {
-         state.newMessageBody = action.payload.body
-         return state
-      }
-      case 'SEND-MESSAGE': {
-         state.messages.push({
-            id: state.messages.length + 1,
-            message: state.newMessageBody
-         })
-         state.newMessageBody = ''
-         return state
-      }
+      case 'UPDATE-NEW-MESSAGE-BODY':
+         return { ...state, newMessageBody: action.payload.body }
+      case 'SEND-MESSAGE':
+         if (state.newMessageBody.trim()) {
+            const stateCopy = {
+               ...state,
+               messages: [...state.messages, { id: state.messages.length + 1, message: state.newMessageBody }]
+            }
+
+            stateCopy.newMessageBody = ''
+
+            return stateCopy
+         } else {
+            return state
+         }
       default:
          return state
    }
