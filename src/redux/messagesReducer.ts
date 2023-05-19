@@ -39,14 +39,11 @@ export const messagesReducer = (state = initialState, action: ActionsType): Init
          return { ...state, newMessageBody: action.payload.body }
       case 'SEND-MESSAGE':
          if (state.newMessageBody.trim()) {
-            const stateCopy = {
+            return {
                ...state,
-               messages: [...state.messages, { id: state.messages.length + 1, message: state.newMessageBody }]
+               messages: [...state.messages, { id: state.messages.length + 1, message: state.newMessageBody }],
+               newMessageBody: '',
             }
-
-            stateCopy.newMessageBody = ''
-
-            return stateCopy
          } else {
             return state
          }

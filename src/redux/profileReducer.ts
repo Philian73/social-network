@@ -24,14 +24,11 @@ export const profileReducer = (state = initialState, action: ActionsType): Initi
          return { ...state, newPostText: action.payload.newText }
       case 'ADD-POST':
          if (state.newPostText.trim()) {
-            const stateCopy = {
+            return {
                ...state,
-               posts: [...state.posts, { id: state.posts.length + 1, message: state.newPostText, likesCount: 0 }]
+               posts: [...state.posts, { id: state.posts.length + 1, message: state.newPostText, likesCount: 0 }],
+               newPostText: '',
             }
-
-            stateCopy.newPostText = ''
-
-            return stateCopy
          } else {
             return state
          }
