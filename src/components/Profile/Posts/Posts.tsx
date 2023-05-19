@@ -2,17 +2,11 @@ import React, { ChangeEvent, FC } from 'react'
 
 import s from './Posts.module.css'
 
-import { PostType } from '../../../redux/profileReducer'
+import { PostsPropsType } from './PostsContainer'
 
 import { Post } from './Post/Post'
 
-type PropsType = {
-   posts: PostType[]
-   newPostText: string
-   updateNewPostText: (text: string) => void
-   addPost: () => void
-}
-export const Posts: FC<PropsType> = ({ posts, newPostText, updateNewPostText, addPost }) => {
+export const Posts: FC<PostsPropsType> = ({ posts, newPostText, updateNewPostText, addPost }) => {
    const onNewPostTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => updateNewPostText(e.currentTarget.value)
    const onAddPost = () => addPost()
 
