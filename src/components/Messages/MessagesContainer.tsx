@@ -1,25 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-import {StoreContext} from '../../StoreContext'
+import { AppStateType } from '../../redux/store'
+import { actions } from '../../redux/messagesReducer'
 
-import {actions} from '../../redux/messagesReducer'
+import { Messages } from './Messages'
 
-import {Messages} from './Messages'
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
+type MapDispatchPropsType = typeof actions
 
-export const MessagesContainer = () => (
-   <StoreContext.Consumer>
-      {store => {
-         const state = store.getState().messagesPage
+export type MessagesPropsType = MapDispatchPropsType & MapStatePropsType
 
-         const updateNewMessageBody = (text: string) => store.dispatch(actions.updateNewMessageBodyAC(text))
-         const sendMessage = () => store.dispatch(actions.sendMessageAC())
+const mapStateToProps = (state: AppStateType) => ({
+   messagesPage: state.messagesPage
+})
 
-         return (
-            <Messages messagesPage={state}
-                      updateNewMessageBody={updateNewMessageBody}
-                      sendMessage={sendMessage}
-            />
-         )
-      }}
-   </StoreContext.Consumer>
-)
+export const MessagesContainer = connect(mapStateToProps, { ...actions })(Messages)
