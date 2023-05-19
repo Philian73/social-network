@@ -2,13 +2,13 @@ import { InferActionTypes } from './store'
 
 type ActionsType = InferActionTypes<typeof actions>
 
-export type PostType = {
+type PostType = {
    id: number
    message: string
    likesCount: number
 }
 
-export type ProfilePageType = typeof initialState
+type InitialStateType = typeof initialState
 
 const initialState = {
    posts: [
@@ -18,7 +18,7 @@ const initialState = {
    newPostText: '',
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
+export const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
       case 'UPDATE-NEW-POST-TEXT': {
          state.newPostText = action.payload.newText
@@ -39,6 +39,6 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 }
 
 export const actions = {
-   updateNewPostTextAC: (text: string) => ({ type: 'UPDATE-NEW-POST-TEXT', payload: { newText: text } } as const),
-   addPostAC: () => ({ type: 'ADD-POST' } as const)
+   updateNewPostText: (text: string) => ({ type: 'UPDATE-NEW-POST-TEXT', payload: { newText: text } } as const),
+   addPost: () => ({ type: 'ADD-POST' } as const)
 }

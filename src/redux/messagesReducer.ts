@@ -2,17 +2,17 @@ import { InferActionTypes } from './store'
 
 type ActionsType = InferActionTypes<typeof actions>
 
-export type MessageType = {
+type MessageType = {
    message: string
    id: number
 }
 
-export type DialogType = {
+type DialogType = {
    id: number
    name: string
 }
 
-export type MessagesPageType = typeof initialState
+type InitialStateType = typeof initialState
 
 const initialState = {
    dialogs: [
@@ -33,7 +33,7 @@ const initialState = {
    newMessageBody: ''
 }
 
-export const messagesReducer = (state: MessagesPageType = initialState, action: ActionsType): MessagesPageType => {
+export const messagesReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
       case 'UPDATE-NEW-MESSAGE-BODY': {
          state.newMessageBody = action.payload.body
@@ -53,6 +53,6 @@ export const messagesReducer = (state: MessagesPageType = initialState, action: 
 }
 
 export const actions = {
-   updateNewMessageBodyAC: (text: string) => ({ type: 'UPDATE-NEW-MESSAGE-BODY', payload: { body: text } } as const),
-   sendMessageAC: () => ({ type: 'SEND-MESSAGE' } as const)
+   updateNewMessageBody: (text: string) => ({ type: 'UPDATE-NEW-MESSAGE-BODY', payload: { body: text } } as const),
+   sendMessage: () => ({ type: 'SEND-MESSAGE' } as const)
 }
