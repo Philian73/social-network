@@ -1,45 +1,17 @@
 import React, { FC } from 'react'
+import axios from 'axios'
 
 import s from './Users.module.css'
+import userPhoto from '../../assets/images/user.png'
 
 import { UsersPropsType } from './UsersContainer'
 
 export const Users: FC<UsersPropsType> = ({ users, setUsers, follow, unfollow }) => {
-   !users.length && setUsers([
-      {
-         id: 1,
-         photoUrl: 'https://images-ext-1.discordapp.net/external/jJchc9pFZ66WKw2Sstrep8vckFezHSpoyiokP2XADM0/%3Fsize%3D512/https/cdn.discordapp.com/avatars/290912033623244800/6097c9a2a483703bec3d0f2cd9a3566f.png',
-         followed: false,
-         fullName: 'Nikolay',
-         status: 'I\'m the boss',
-         location: {
-            country: 'Russia',
-            city: 'Ulyanovsk',
-         },
-      },
-      {
-         id: 2,
-         photoUrl: 'https://images-ext-1.discordapp.net/external/jJchc9pFZ66WKw2Sstrep8vckFezHSpoyiokP2XADM0/%3Fsize%3D512/https/cdn.discordapp.com/avatars/290912033623244800/6097c9a2a483703bec3d0f2cd9a3566f.png',
-         followed: true,
-         fullName: 'Darya',
-         status: 'I\'m the boss girl',
-         location: {
-            country: 'Russia',
-            city: 'Ulyanovsk',
-         },
-      },
-      {
-         id: 3,
-         photoUrl: 'https://images-ext-1.discordapp.net/external/jJchc9pFZ66WKw2Sstrep8vckFezHSpoyiokP2XADM0/%3Fsize%3D512/https/cdn.discordapp.com/avatars/290912033623244800/6097c9a2a483703bec3d0f2cd9a3566f.png',
-         followed: true,
-         fullName: 'Nikita',
-         status: 'I\'m a friend of the boss',
-         location: {
-            country: 'Russia',
-            city: 'Saint Petersburg',
-         },
-      },
-   ])
+   !users.length && axios
+      .get('https://social-network.samuraijs.com/api/1.0/users')
+      .then(response => {
+         setUsers(response.data.items)
+      })
 
    const usersMap = users.map(user => {
       const onUnfollow = () => unfollow(user.id)
@@ -48,7 +20,8 @@ export const Users: FC<UsersPropsType> = ({ users, setUsers, follow, unfollow })
       return (
          <div key={user.id}>
             <div>
-               <img src={user.photoUrl} alt={`Avatar of ${user.fullName}`} className={s.userPhoto} />
+               <img src={user.photos.small ? user.photos.small : userPhoto} alt={`Avatar of ${user.name}`}
+                    className={s.userPhoto} />
             </div>
             <div>
                {user.followed ? (
@@ -59,12 +32,12 @@ export const Users: FC<UsersPropsType> = ({ users, setUsers, follow, unfollow })
             </div>
             <div>
                <div>
-                  <p>{user.fullName}</p>
+                  <p>{user.name}</p>
                   <p>{user.status}</p>
                </div>
                <div>
-                  <p>{user.location.country}</p>
-                  <p>{user.location.city}</p>
+                  <p>{'user.location.country'}</p>
+                  <p>{'user.location.city'}</p>
                </div>
             </div>
          </div>
