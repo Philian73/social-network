@@ -7,11 +7,13 @@ import userPhoto from '../../assets/images/user.png'
 import { UsersPropsType } from './UsersContainer'
 
 export const Users: FC<UsersPropsType> = ({ users, setUsers, follow, unfollow }) => {
-   !users.length && axios
-      .get('https://social-network.samuraijs.com/api/1.0/users')
-      .then(response => {
-         setUsers(response.data.items)
-      })
+   const getUsers = () => {
+      !users.length && axios
+         .get('https://social-network.samuraijs.com/api/1.0/users')
+         .then(response => {
+            setUsers(response.data.items)
+         })
+   }
 
    const usersMap = users.map(user => {
       const onUnfollow = () => unfollow(user.id)
@@ -44,5 +46,10 @@ export const Users: FC<UsersPropsType> = ({ users, setUsers, follow, unfollow })
       )
    })
 
-   return <div>{usersMap}</div>
+   return (
+      <div>
+         <button onClick={getUsers}>Get Users</button>
+         {usersMap}
+      </div>
+   )
 }
