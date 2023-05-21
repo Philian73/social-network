@@ -38,14 +38,22 @@ export class Users extends Component<UsersPropsType> {
 
       for (let i = 1; i <= pagesCount; i++) pages.push(i)
 
-      const pagesMap = pages.map(page => {
+      let slicedPages
+
+      if (currentPage - 3 < 0) {
+         slicedPages = pages.slice(0, 5)
+      } else {
+         slicedPages = pages.slice(currentPage - 3, currentPage + 2)
+      }
+
+      const pagesMap = slicedPages.map(page => {
          const onClick = () => this.onPageChanged(page)
 
          const currentPageClasses = page === currentPage ? s.selectedPage : undefined
 
          return (
             <span key={page} className={currentPageClasses} onClick={onClick}>
-               {page}
+               -{page}-
             </span>
          )
       })
