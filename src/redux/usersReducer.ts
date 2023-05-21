@@ -4,14 +4,14 @@ type ActionsType = InferActionTypes<typeof actions>
 
 type UserType = {
    id: number
-   photoUrl: string
-   followed: boolean
-   fullName: string
+   uniqueUrlName: string
+   name: string
    status: string
-   location: {
-      country: string
-      city: string
+   photos: {
+      small: string
+      large: string
    }
+   followed: boolean
 }
 
 type InitialStateType = typeof initialState
