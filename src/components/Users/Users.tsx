@@ -8,26 +8,58 @@ import { UsersPropsType } from './UsersContainer'
 
 export class Users extends Component<UsersPropsType> {
    componentDidMount() {
-      const { setUsers } = this.props
+      const { pageSize, currentPage, setUsers, setTotalUsersCount } = this.props
 
       axios
-         .get('https://social-network.samuraijs.com/api/1.0/users')
+         .get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
+         .then(response => {
+            setUsers(response.data.items)
+            setTotalUsersCount(response.data.totalCount)
+         })
+   }
+
+   onPageChanged = (pageNumber: number) => {
+      const { pageSize, setUsers, setCurrentPage } = this.props
+
+      setCurrentPage(pageNumber)
+
+      axios
+         .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`)
          .then(response => {
             setUsers(response.data.items)
          })
    }
 
    render() {
-      const { users, follow, unfollow } = this.props
+      const { users, pageSize, totalUsersCount, currentPage, follow, unfollow } = this.props
 
+      const pagesCount = Math.ceil(totalUsersCount / pageSize)
+      const pages = []
+
+      for (let i = 1; i <= pagesCount; i++) pages.push(i)
+
+      const pagesMap = pages.map(page => {
+         const onClick = () => this.onPageChanged(page)
+
+         const currentPageClasses = page === currentPage ? s.selectedPage : undefined
+
+         return (
+            <span key={page} className={currentPageClasses} onClick={onClick}>
+               {page}
+            </span>
+         )
+      })
       const usersMap = users.map(user => {
          const onUnfollow = () => unfollow(user.id)
          const onFollow = () => follow(user.id)
 
+         const srcImg = user.photos.small ? user.photos.small : userPhoto
+
          return (
             <div key={user.id}>
                <div>
-                  <img src={user.photos.small ? user.photos.small : userPhoto} alt={`Avatar of ${user.name}`}
+                  <img src={srcImg}
+                       alt={`Avatar of ${user.name}`}
                        className={s.userPhoto} />
                </div>
                <div>
@@ -53,6 +85,9 @@ export class Users extends Component<UsersPropsType> {
 
       return (
          <div>
+            <div>
+               {pagesMap}
+            </div>
             {usersMap}
          </div>
       )
