@@ -7,9 +7,7 @@ import userPhoto from '../../assets/images/user.png'
 import { UsersPropsType } from './UsersContainer'
 
 export class Users extends Component<UsersPropsType> {
-   constructor(props: UsersPropsType) {
-      super(props)
-
+   componentDidMount() {
       const { setUsers } = this.props
 
       axios
