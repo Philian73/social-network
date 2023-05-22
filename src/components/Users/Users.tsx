@@ -1,38 +1,29 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { FC } from 'react'
 
 import s from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
 
-import { UsersPropsType } from './UsersContainer'
+import { UserType } from '../../redux/usersReducer'
 
-export class Users extends Component<UsersPropsType> {
-   componentDidMount() {
-      const { pageSize, currentPage, setUsers, setTotalUsersCount } = this.props
-
-      axios
-         .get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
-         .then(response => {
-            setUsers(response.data.items)
-            setTotalUsersCount(response.data.totalCount)
-         })
-   }
-
-   onPageChanged = (pageNumber: number) => {
-      const { pageSize, setUsers, setCurrentPage } = this.props
-
-      setCurrentPage(pageNumber)
-
-      axios
-         .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`)
-         .then(response => {
-            setUsers(response.data.items)
-         })
-   }
-
-   render() {
-      const { users, pageSize, totalUsersCount, currentPage, follow, unfollow } = this.props
-
+type PropsType = {
+   users: UserType[]
+   pageSize: number
+   totalUsersCount: number
+   currentPage: number
+   onPageChanged: (pageNumber: number) => void
+   follow: (userID: number) => void
+   unfollow: (userID: number) => void
+}
+export const Users: FC<PropsType> =
+   ({
+       users,
+       pageSize,
+       totalUsersCount,
+       currentPage,
+       onPageChanged,
+       follow,
+       unfollow
+    }) => {
       const pagesCount = Math.ceil(totalUsersCount / pageSize)
       const pages = []
 
@@ -47,7 +38,7 @@ export class Users extends Component<UsersPropsType> {
       }
 
       const pagesMap = slicedPages.map(page => {
-         const onClick = () => this.onPageChanged(page)
+         const onClick = () => onPageChanged(page)
 
          const currentPageClasses = page === currentPage ? s.selectedPage : undefined
 
@@ -100,4 +91,3 @@ export class Users extends Component<UsersPropsType> {
          </div>
       )
    }
-}
