@@ -22,6 +22,7 @@ const initialState = {
    pageSize: 5,
    totalUsersCount: 0,
    currentPage: 1,
+   isFetching: false,
 }
 
 export const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -42,6 +43,8 @@ export const usersReducer = (state = initialState, action: ActionsType): Initial
             ...state,
             users: state.users.map(user => user.id === action.payload.userID ? { ...user, followed: false } : user)
          }
+      case 'TOGGLE-IS-FETCHING':
+         return { ...state, isFetching: action.payload.isFetching }
       default:
          return state
    }
@@ -53,4 +56,5 @@ export const actions = {
    setCurrentPage: (currentPage: number) => ({ type: 'SET-CURRENT-PAGE', payload: { currentPage } } as const),
    follow: (userID: number) => ({ type: 'FOLLOW', payload: { userID } } as const),
    unfollow: (userID: number) => ({ type: 'UNFOLLOW', payload: { userID } } as const),
+   toggleIsFetching: (isFetching: boolean) => ({ type: 'TOGGLE-IS-FETCHING', payload: { isFetching } } as const),
 }
