@@ -7,7 +7,7 @@ type PhotosType = {
    large: string | null
 }
 
-type UserType = {
+export type UserType = {
    id: number
    name: string
    status: string
