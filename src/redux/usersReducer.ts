@@ -1,19 +1,7 @@
 import { InferActionTypes } from './store'
+import { UserType } from './types'
 
 type ActionsType = InferActionTypes<typeof actions>
-
-type PhotosType = {
-   small: string | null
-   large: string | null
-}
-
-export type UserType = {
-   id: number
-   name: string
-   status: string
-   photos: PhotosType
-   followed: boolean
-}
 
 type InitialStateType = typeof initialState
 

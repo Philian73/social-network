@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
+import { NavLink } from 'react-router-dom'
 
 import s from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
 
-import { UserType } from '../../redux/usersReducer'
+import { UserType } from '../../redux/types'
 
 type PropsType = {
    users: UserType[]
@@ -57,9 +58,11 @@ export const Users: FC<PropsType> =
          return (
             <div key={user.id}>
                <div>
-                  <img src={srcImg}
-                       alt={`Avatar of ${user.name}`}
-                       className={s.userPhoto} />
+                  <NavLink to={`/profile/${user.id}`}>
+                     <img src={srcImg}
+                          alt={`Avatar of ${user.name}`}
+                          className={s.userPhoto} />
+                  </NavLink>
                </div>
                <div>
                   {user.followed ? (
