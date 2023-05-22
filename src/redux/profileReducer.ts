@@ -1,12 +1,7 @@
 import { InferActionTypes } from './store'
+import { PostType, ProfileType } from './types'
 
 type ActionsType = InferActionTypes<typeof actions>
-
-type PostType = {
-   id: number
-   message: string
-   likesCount: number
-}
 
 type InitialStateType = typeof initialState
 
@@ -16,6 +11,7 @@ const initialState = {
       { id: 2, message: 'It\'s my first post', likesCount: 20 },
    ] as PostType[],
    newPostText: '',
+   profile: null as ProfileType | null,
 }
 
 export const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -32,6 +28,8 @@ export const profileReducer = (state = initialState, action: ActionsType): Initi
          } else {
             return state
          }
+      case 'SET-USER-PROFILE':
+         return { ...state, profile: action.payload.profile }
       default:
          return state
    }
@@ -39,5 +37,6 @@ export const profileReducer = (state = initialState, action: ActionsType): Initi
 
 export const actions = {
    updateNewPostText: (text: string) => ({ type: 'UPDATE-NEW-POST-TEXT', payload: { newText: text } } as const),
-   addPost: () => ({ type: 'ADD-POST' } as const)
+   addPost: () => ({ type: 'ADD-POST' } as const),
+   setUserProfile: (profile: ProfileType) => ({ type: 'SET-USER-PROFILE', payload: { profile } } as const),
 }
