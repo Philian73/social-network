@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getUsers } from '../../api/api'
+import { usersAPI } from '../../api/usersAPI'
 
 import { AppStateType } from '../../redux/store'
 import { actions } from '../../redux/usersReducer'
@@ -20,7 +20,7 @@ class UsersAPIContainer extends Component<UsersPropsType> {
 
       toggleIsFetching(true)
 
-      getUsers(currentPage, pageSize)
+      usersAPI.getUsers(currentPage, pageSize)
          .then(data => {
             toggleIsFetching(false)
             setUsers(data.items)
@@ -35,7 +35,7 @@ class UsersAPIContainer extends Component<UsersPropsType> {
 
       setCurrentPage(pageNumber)
 
-      getUsers(pageNumber, pageSize)
+      usersAPI.getUsers(pageNumber, pageSize)
          .then(data => {
             toggleIsFetching(false)
             setUsers(data.items)

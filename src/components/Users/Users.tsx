@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
 
 import s from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
-import { API_KEY } from '../../api/API_KEY'
+
+import { usersAPI } from '../../api/usersAPI'
 
 import { UserType } from '../../redux/types'
 
@@ -53,29 +53,17 @@ export const Users: FC<PropsType> =
       })
       const usersMap = users.map(user => {
          const onUnfollow = () => {
-            axios
-               .delete(`https://social-network.samuraijs.com/api/1.0//follow/${user.id}`, {
-                  withCredentials: true,
-                  headers: {
-                     'API-KEY': API_KEY,
-                  },
-               })
-               .then(response => {
-                  if (response.data.resultCode === 0) {
+            usersAPI.unfollow(user.id)
+               .then(data => {
+                  if (data.resultCode === 0) {
                      unfollow(user.id)
                   }
                })
          }
          const onFollow = () => {
-            axios
-               .post(`https://social-network.samuraijs.com/api/1.0//follow/${user.id}`, {}, {
-                  withCredentials: true,
-                  headers: {
-                     'API-KEY': API_KEY,
-                  },
-               })
-               .then(response => {
-                  if (response.data.resultCode === 0) {
+            usersAPI.follow(user.id)
+               .then(data => {
+                  if (data.resultCode === 0) {
                      follow(user.id)
                   }
                })
