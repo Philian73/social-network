@@ -21,10 +21,10 @@ class UsersAPIContainer extends Component<UsersPropsType> {
       toggleIsFetching(true)
 
       getUsers(currentPage, pageSize)
-         .then(response => {
+         .then(data => {
             toggleIsFetching(false)
-            setUsers(response.data.items)
-            setTotalUsersCount(response.data.totalCount)
+            setUsers(data.items)
+            setTotalUsersCount(data.totalCount)
          })
    }
 
@@ -36,9 +36,9 @@ class UsersAPIContainer extends Component<UsersPropsType> {
       setCurrentPage(pageNumber)
 
       getUsers(pageNumber, pageSize)
-         .then(response => {
+         .then(data => {
             toggleIsFetching(false)
-            setUsers(response.data.items)
+            setUsers(data.items)
          })
    }
 
