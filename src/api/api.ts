@@ -1,10 +1,17 @@
 import axios from 'axios'
+import { API_KEY } from './API_KEY'
+import { UserType } from '../redux/types'
 
-export const getUsers = (currentPage: number = 1, pageSize: number = 10) => {
-   return axios
-      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`, {
-         withCredentials: true,
-      })
-      .then(response => response.data)
+export type GetItemsType = {
+   items: UserType[]
+   totalCount: number
+   error: string | null
 }
 
+export const instance = axios.create({
+   withCredentials: true,
+   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+   headers: {
+      'API-KEY': API_KEY,
+   },
+})
