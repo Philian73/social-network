@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
+
+import { getUsers } from '../../api/api'
 
 import { AppStateType } from '../../redux/store'
 import { actions } from '../../redux/usersReducer'
@@ -16,11 +17,10 @@ export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 class UsersAPIContainer extends Component<UsersPropsType> {
    componentDidMount() {
       const { pageSize, currentPage, setUsers, setTotalUsersCount, toggleIsFetching } = this.props
+
       toggleIsFetching(true)
-      axios
-         .get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`, {
-            withCredentials: true,
-         })
+
+      getUsers(currentPage, pageSize)
          .then(response => {
             toggleIsFetching(false)
             setUsers(response.data.items)
@@ -35,10 +35,7 @@ class UsersAPIContainer extends Component<UsersPropsType> {
 
       setCurrentPage(pageNumber)
 
-      axios
-         .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`, {
-            withCredentials: true,
-         })
+      getUsers(pageNumber, pageSize)
          .then(response => {
             toggleIsFetching(false)
             setUsers(response.data.items)
