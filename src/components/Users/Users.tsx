@@ -13,9 +13,11 @@ type PropsType = {
    pageSize: number
    totalUsersCount: number
    currentPage: number
+   followingInProgress: number[]
    onPageChanged: (pageNumber: number) => void
    follow: (userID: number) => void
    unfollow: (userID: number) => void
+   toggleFollowingInProgress: (userID: number, isFetching: boolean) => void
 }
 export const Users: FC<PropsType> =
    ({
@@ -23,9 +25,11 @@ export const Users: FC<PropsType> =
        pageSize,
        totalUsersCount,
        currentPage,
+       followingInProgress,
        onPageChanged,
        follow,
-       unfollow
+       unfollow,
+       toggleFollowingInProgress,
     }) => {
       const pagesCount = Math.ceil(totalUsersCount / pageSize)
       const pages = []
@@ -53,19 +57,27 @@ export const Users: FC<PropsType> =
       })
       const usersMap = users.map(user => {
          const onUnfollow = () => {
+            toggleFollowingInProgress(user.id, true)
+
             usersAPI.unfollow(user.id)
                .then(data => {
                   if (data.resultCode === 0) {
                      unfollow(user.id)
                   }
+
+                  toggleFollowingInProgress(user.id, false)
                })
          }
          const onFollow = () => {
+            toggleFollowingInProgress(user.id, true)
+
             usersAPI.follow(user.id)
                .then(data => {
                   if (data.resultCode === 0) {
                      follow(user.id)
                   }
+
+                  toggleFollowingInProgress(user.id, false)
                })
          }
 
@@ -82,9 +94,17 @@ export const Users: FC<PropsType> =
                </div>
                <div>
                   {user.followed ? (
-                     <button onClick={onUnfollow}>Unfollow</button>
+                     <button disabled={followingInProgress.includes(user.id)}
+                             onClick={onUnfollow}
+                     >
+                        Unfollow
+                     </button>
                   ) : (
-                     <button onClick={onFollow}>follow</button>
+                     <button disabled={followingInProgress.includes(user.id)}
+                             onClick={onFollow}
+                     >
+                        follow
+                     </button>
                   )}
                </div>
                <div>
