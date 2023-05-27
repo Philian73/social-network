@@ -11,6 +11,7 @@ const initialState = {
    totalUsersCount: 0,
    currentPage: 1,
    isFetching: false,
+   followingInProgress: [] as number[],
 }
 
 export const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -33,6 +34,13 @@ export const usersReducer = (state = initialState, action: ActionsType): Initial
          }
       case 'TOGGLE-IS-FETCHING':
          return { ...state, isFetching: action.payload.isFetching }
+      case 'TOGGLE-FOLLOWING-IN-PROGRESS':
+         return {
+            ...state,
+            followingInProgress: action.payload.isFetching
+               ? [...state.followingInProgress, action.payload.userID]
+               : state.followingInProgress.filter(id => id !== action.payload.userID)
+         }
       default:
          return state
    }
@@ -45,4 +53,8 @@ export const actions = {
    follow: (userID: number) => ({ type: 'FOLLOW', payload: { userID } } as const),
    unfollow: (userID: number) => ({ type: 'UNFOLLOW', payload: { userID } } as const),
    toggleIsFetching: (isFetching: boolean) => ({ type: 'TOGGLE-IS-FETCHING', payload: { isFetching } } as const),
+   toggleFollowingInProgress: (userID: number, isFetching: boolean) => ({
+      type: 'TOGGLE-FOLLOWING-IN-PROGRESS',
+      payload: { userID, isFetching }
+   } as const),
 }
