@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom'
 import s from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
 
-import { usersAPI } from '../../api/usersAPI'
-
 import { UserType } from '../../redux/types'
 
 type PropsType = {
@@ -15,9 +13,8 @@ type PropsType = {
    currentPage: number
    followingInProgress: number[]
    onPageChanged: (pageNumber: number) => void
-   follow: (userID: number) => void
-   unfollow: (userID: number) => void
-   toggleFollowingInProgress: (userID: number, isFetching: boolean) => void
+   follow: any
+   unfollow: any
 }
 export const Users: FC<PropsType> =
    ({
@@ -29,7 +26,6 @@ export const Users: FC<PropsType> =
        onPageChanged,
        follow,
        unfollow,
-       toggleFollowingInProgress,
     }) => {
       const pagesCount = Math.ceil(totalUsersCount / pageSize)
       const pages = []
@@ -56,30 +52,8 @@ export const Users: FC<PropsType> =
          )
       })
       const usersMap = users.map(user => {
-         const onUnfollow = () => {
-            toggleFollowingInProgress(user.id, true)
-
-            usersAPI.unfollow(user.id)
-               .then(data => {
-                  if (data.resultCode === 0) {
-                     unfollow(user.id)
-                  }
-
-                  toggleFollowingInProgress(user.id, false)
-               })
-         }
-         const onFollow = () => {
-            toggleFollowingInProgress(user.id, true)
-
-            usersAPI.follow(user.id)
-               .then(data => {
-                  if (data.resultCode === 0) {
-                     follow(user.id)
-                  }
-
-                  toggleFollowingInProgress(user.id, false)
-               })
-         }
+         const onUnfollow = () => unfollow(user.id)
+         const onFollow = () => follow(user.id)
 
          const srcImg = user.photos.small ? user.photos.small : userPhoto
 
