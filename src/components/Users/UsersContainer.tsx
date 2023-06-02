@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { usersAPI } from '../../api/usersAPI'
-
 import { AppStateType } from '../../redux/store'
-import { actions, getUsersThunkCreator } from '../../redux/usersReducer'
+import { actions, follow, getUsers, unfollow } from '../../redux/usersReducer'
 
 import { Users } from './Users'
 import { Preloader } from '../common/Preloader/Preloader'
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
-type MapDispatchPropsType = typeof actions & { getUsers: any }
+type MapDispatchPropsType = typeof actions & { getUsers: any, follow: any, unfollow: any }
 
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -22,17 +20,9 @@ class UsersAPIContainer extends Component<UsersPropsType> {
    }
 
    onPageChanged = (pageNumber: number) => {
-      const { pageSize, setUsers, setCurrentPage, toggleIsFetching } = this.props
+      const { pageSize, getUsers } = this.props
 
-      toggleIsFetching(true)
-
-      setCurrentPage(pageNumber)
-
-      usersAPI.getUsers(pageNumber, pageSize)
-         .then(data => {
-            toggleIsFetching(false)
-            setUsers(data.items)
-         })
+      getUsers(pageNumber, pageSize)
    }
 
    render() {
@@ -45,7 +35,6 @@ class UsersAPIContainer extends Component<UsersPropsType> {
          followingInProgress,
          follow,
          unfollow,
-         toggleFollowingInProgress,
       } = this.props
       return (
          <>
@@ -58,7 +47,6 @@ class UsersAPIContainer extends Component<UsersPropsType> {
                    onPageChanged={this.onPageChanged}
                    follow={follow}
                    unfollow={unfollow}
-                   toggleFollowingInProgress={toggleFollowingInProgress}
             />
          </>
       )
@@ -75,6 +63,5 @@ const mapStateToProps = (state: AppStateType) => ({
 })
 
 export const UsersContainer = connect(mapStateToProps, {
-   ...actions,
-   getUsers: getUsersThunkCreator
+   ...actions, getUsers, unfollow, follow
 })(UsersAPIContainer)
