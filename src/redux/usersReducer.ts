@@ -1,5 +1,8 @@
 import { InferActionTypes } from './store'
+import { Dispatch } from 'redux'
 import { UserType } from './types'
+
+import { usersAPI } from '../api/usersAPI'
 
 type ActionsType = InferActionTypes<typeof actions>
 
@@ -57,4 +60,17 @@ export const actions = {
       type: 'TOGGLE-FOLLOWING-IN-PROGRESS',
       payload: { userID, isFetching }
    } as const),
+}
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+   return (dispatch: Dispatch<ActionsType>) => {
+      dispatch(actions.toggleIsFetching(true))
+
+      usersAPI.getUsers(currentPage, pageSize)
+         .then(data => {
+            dispatch(actions.toggleIsFetching(false))
+            dispatch(actions.setUsers(data.items))
+            dispatch(actions.setTotalUsersCount(data.totalCount))
+         })
+   }
 }
