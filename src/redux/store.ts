@@ -1,4 +1,5 @@
-import { combineReducers, createStore } from 'redux'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 
 import { profileReducer } from './profileReducer'
 import { messagesReducer } from './messagesReducer'
@@ -16,4 +17,4 @@ const rootReducer = combineReducers({
    auth: AuthReducer,
 })
 
-export const store = createStore(rootReducer)
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
