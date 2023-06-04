@@ -1,3 +1,6 @@
+import { Dispatch } from 'redux'
+
+import { authAPI } from '../api/authAPI'
 import { InferActionTypes } from './store'
 
 type ActionsType = InferActionTypes<typeof actions>
@@ -31,4 +34,16 @@ export const actions = {
          data: { id, email, login }
       }
    } as const)
+}
+
+export const getAuthUserData = () => {
+   return (dispatch: Dispatch) => {
+      authAPI.me()
+         .then(response => {
+            if (response.data.resultCode === 0) {
+               const { id, login, email } = response.data.data
+               dispatch(actions.setAuthUserData(id, email, login))
+            }
+         })
+   }
 }
