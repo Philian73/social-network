@@ -11,7 +11,8 @@ type MapDispatchPropsType = typeof actions
 export type MessagesPropsType = MapDispatchPropsType & MapStatePropsType
 
 const mapStateToProps = (state: AppStateType) => ({
-   messagesPage: state.messagesPage
+   messagesPage: state.messagesPage,
+   isAuth: state.auth.isAuth,
 })
 
 export const MessagesContainer = connect(mapStateToProps, { ...actions })(Messages)
