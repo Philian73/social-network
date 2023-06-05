@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC } from 'react'
+import { Redirect } from 'react-router-dom'
 
 import s from './Messages.module.css'
 
@@ -7,7 +8,7 @@ import { MessagesPropsType } from './MessagesContainer'
 import { DialogItem } from './DialogItem/DialogItem'
 import { Message } from './Message/Message'
 
-export const Messages: FC<MessagesPropsType> = ({ messagesPage, updateNewMessageBody, sendMessage }) => {
+export const Messages: FC<MessagesPropsType> = ({ messagesPage, updateNewMessageBody, sendMessage, isAuth }) => {
    const onNewMessageBodyChange = (e: ChangeEvent<HTMLTextAreaElement>) => updateNewMessageBody(e.currentTarget.value)
    const onSendMessageClick = () => sendMessage()
 
@@ -15,6 +16,8 @@ export const Messages: FC<MessagesPropsType> = ({ messagesPage, updateNewMessage
       .map(d => <DialogItem key={d.id} id={d.id} name={d.name} />)
    const messagesMap = messagesPage.messages
       .map(m => <Message key={m.id} message={m.message} />)
+
+   if (!isAuth) return <Redirect to="/login" />
 
    return (
       <div className={s.messages}>
