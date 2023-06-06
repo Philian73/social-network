@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 
 import { AppStateType } from '../../redux/store'
 import { actions, getUserProfile } from '../../redux/profileReducer'
