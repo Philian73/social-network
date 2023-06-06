@@ -4,6 +4,7 @@ import { AppStateType } from '../../redux/store'
 import { actions } from '../../redux/messagesReducer'
 
 import { Messages } from './Messages'
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = typeof actions
@@ -15,4 +16,6 @@ const mapStateToProps = (state: AppStateType) => ({
    isAuth: state.auth.isAuth,
 })
 
-export const MessagesContainer = connect(mapStateToProps, { ...actions })(Messages)
+const AuthRedirectComponent = withAuthRedirect(Messages)
+
+export const MessagesContainer = connect(mapStateToProps, { ...actions })(AuthRedirectComponent)
