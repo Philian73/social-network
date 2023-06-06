@@ -13,7 +13,6 @@ export type MessagesPropsType = MapDispatchPropsType & MapStatePropsType
 
 const mapStateToProps = (state: AppStateType) => ({
    messagesPage: state.messagesPage,
-   isAuth: state.auth.isAuth,
 })
 
 const AuthRedirectComponent = withAuthRedirect(Messages)
