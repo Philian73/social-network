@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FC } from 'react'
-
-import s from './Posts.module.css'
+import { ChangeEvent, FC } from 'react'
 
 import { PostsPropsType } from './PostsContainer'
 
 import { Post } from './Post/Post'
+
+import s from './Posts.module.css'
 
 export const Posts: FC<PostsPropsType> = ({ posts, newPostText, updateNewPostText, addPost }) => {
    const onNewPostTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => updateNewPostText(e.currentTarget.value)

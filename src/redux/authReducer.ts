@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 
-import { authAPI } from '../api/authAPI'
+import { authAPI } from 'api/authAPI'
 import { InferActionTypes } from './store'
 
 type ActionsType = InferActionTypes<typeof actions>

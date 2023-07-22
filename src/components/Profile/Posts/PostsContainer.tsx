@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { AppStateType } from '../../../redux/store'
-import { actions } from '../../../redux/profileReducer'
+import { AppStateType } from 'redux/store'
+import { actions } from 'redux/profileReducer'
 
 import { Posts } from './Posts'
 

@@ -1,10 +1,11 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import s from './Users.module.css'
-import userPhoto from '../../assets/images/user.png'
+import userPhoto from 'assets/images/user.png'
 
-import { UserType } from '../../redux/types'
+import { UserType } from 'redux/types'
+
+import s from './Users.module.css'
 
 type PropsType = {
    users: UserType[]

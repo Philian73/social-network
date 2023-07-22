@@ -1,11 +1,12 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
+
+import userPhoto from 'assets/images/user.png'
+
+import { ProfileType } from 'redux/types'
+
+import { Preloader } from 'components/common/Preloader/Preloader'
 
 import s from './ProfileInfo.module.css'
-import userPhoto from '../../../assets/images/user.png'
-
-import { ProfileType } from '../../../redux/types'
-
-import { Preloader } from '../../common/Preloader/Preloader'
 
 type PropsType = {
    profile: ProfileType | null

@@ -1,14 +1,13 @@
-import React, {FC} from 'react'
+import { FC } from 'react'
+import { NavLink } from 'react-router-dom'
 
 import s from '../Messages.module.css'
-
-import {NavLink} from 'react-router-dom'
 
 type PropsType = {
    id: number
    name: string
 }
-export const DialogItem: FC<PropsType> = ({id, name}) => {
+export const DialogItem: FC<PropsType> = ({ id, name }) => {
    const path: string = `/messages/${id}`
 
    return (

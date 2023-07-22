@@ -1,16 +1,11 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { AppStateType } from '../../redux/store'
-import { actions, follow, getUsers, unfollow } from '../../redux/usersReducer'
+import { AppStateType } from 'redux/store'
+import { actions, follow, getUsers, unfollow } from 'redux/usersReducer'
 
+import { Preloader } from 'components/common/Preloader/Preloader'
 import { Users } from './Users'
-import { Preloader } from '../common/Preloader/Preloader'
-
-type MapStatePropsType = ReturnType<typeof mapStateToProps>
-type MapDispatchPropsType = typeof actions & { getUsers: any, follow: any, unfollow: any }
-
-export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
 class UsersAPIContainer extends Component<UsersPropsType> {
    componentDidMount() {
@@ -65,3 +60,10 @@ const mapStateToProps = (state: AppStateType) => ({
 export const UsersContainer = connect(mapStateToProps, {
    ...actions, getUsers, unfollow, follow
 })(UsersAPIContainer)
+
+
+// TYPES
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
+type MapDispatchPropsType = typeof actions & { getUsers: any, follow: any, unfollow: any }
+
+export type UsersPropsType = MapStatePropsType & MapDispatchPropsType

@@ -2,7 +2,7 @@ import { InferActionTypes } from './store'
 import { Dispatch } from 'redux'
 import { UserType } from './types'
 
-import { usersAPI } from '../api/usersAPI'
+import { usersAPI } from 'api/usersAPI'
 
 type ActionsType = InferActionTypes<typeof actions>
 

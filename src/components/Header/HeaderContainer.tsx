@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { AppStateType } from '../../redux/store'
-import { actions, getAuthUserData } from '../../redux/authReducer'
+import { AppStateType } from 'redux/store'
+import { actions, getAuthUserData } from 'redux/authReducer'
 
 import { Header } from './Header'
 
