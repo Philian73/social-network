@@ -1,23 +1,13 @@
-import React, { Component } from 'react'
+import { Component, ComponentType } from 'react'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-import { AppStateType } from '../../redux/store'
-import { actions, getUserProfile } from '../../redux/profileReducer'
+import { AppStateType } from 'redux/store'
+import { actions, getUserProfile } from 'redux/profileReducer'
 
+import { withAuthRedirect } from 'hoc/withAuthRedirect'
 import { Profile } from './Profile'
-import { withAuthRedirect } from '../../hoc/withAuthRedirect'
-
-type PathParamsType = {
-   userId: string
-}
-
-type MapStatePropsType = ReturnType<typeof mapStateToProps>
-type MapDispatchPropsType = typeof actions & { getUserProfile: any }
-
-export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
-
-type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
 class ProfileAPIContainer extends Component<PropsType> {
    componentDidMount() {
@@ -34,12 +24,25 @@ class ProfileAPIContainer extends Component<PropsType> {
    }
 }
 
-const AuthRedirectComponent = withAuthRedirect(ProfileAPIContainer)
-
-const WithURLDataContainerComponent = withRouter(AuthRedirectComponent)
-
 const mapStateToProps = (state: AppStateType) => ({
    profile: state.profilePage.profile,
 })
 
-export const ProfileContainer = connect(mapStateToProps, { ...actions, getUserProfile })(WithURLDataContainerComponent)
+export const ProfileContainer = compose<ComponentType>(
+   connect(mapStateToProps, { ...actions, getUserProfile }),
+   withRouter,
+   withAuthRedirect,
+)(ProfileAPIContainer)
+
+
+// TYPES
+type PathParamsType = {
+   userId: string
+}
+
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
+type MapDispatchPropsType = typeof actions & { getUserProfile: any }
+
+export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
+
+type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
