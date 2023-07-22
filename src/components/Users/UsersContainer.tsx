@@ -1,4 +1,5 @@
-import { Component } from 'react'
+import { Component, ComponentType } from 'react'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 
 import { AppStateType } from 'redux/store'
@@ -57,9 +58,9 @@ const mapStateToProps = (state: AppStateType) => ({
    followingInProgress: state.usersPage.followingInProgress,
 })
 
-export const UsersContainer = connect(mapStateToProps, {
-   ...actions, getUsers, unfollow, follow
-})(UsersAPIContainer)
+export const UsersContainer = compose<ComponentType>(
+   connect(mapStateToProps, { ...actions, getUsers, unfollow, follow }),
+)(UsersAPIContainer)
 
 
 // TYPES
