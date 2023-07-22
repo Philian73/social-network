@@ -7,6 +7,7 @@ import { actions, follow, getUsers, unfollow } from 'redux/usersReducer'
 
 import { Preloader } from 'components/common/Preloader/Preloader'
 import { Users } from './Users'
+import { withAuthRedirect } from 'hoc/withAuthRedirect'
 
 class UsersAPIContainer extends Component<UsersPropsType> {
    componentDidMount() {
@@ -59,6 +60,7 @@ const mapStateToProps = (state: AppStateType) => ({
 })
 
 export const UsersContainer = compose<ComponentType>(
+   withAuthRedirect,
    connect(mapStateToProps, { ...actions, getUsers, unfollow, follow }),
 )(UsersAPIContainer)
 
