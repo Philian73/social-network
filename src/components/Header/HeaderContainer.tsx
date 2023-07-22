@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, ComponentType } from 'react'
 import { connect } from 'react-redux'
 
 import { AppStateType } from 'redux/store'
 import { actions, getAuthUserData } from 'redux/authReducer'
 
 import { Header } from './Header'
+import { compose } from 'redux'
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = typeof actions & { getAuthUserData: any }
@@ -28,4 +29,6 @@ const mapStateToProps = (state: AppStateType) => ({
    login: state.auth.login,
 })
 
-export const HeaderContainer = connect(mapStateToProps, { ...actions, getAuthUserData })(HeaderAPIContainer)
+export const HeaderContainer = compose<ComponentType>(
+   connect(mapStateToProps, { ...actions, getAuthUserData })
+)(HeaderAPIContainer)
