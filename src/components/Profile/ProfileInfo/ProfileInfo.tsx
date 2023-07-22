@@ -5,6 +5,7 @@ import userPhoto from 'assets/images/user.png'
 import { ProfileType } from 'redux/types'
 
 import { Preloader } from 'components/common/Preloader/Preloader'
+import { ProfileStatus } from './ProfileStatus/ProfileStatus'
 
 import s from './ProfileInfo.module.css'
 
@@ -21,7 +22,7 @@ export const ProfileInfo: FC<PropsType> = ({ profile }) => {
          </div>
          <div className={s.descriptionBlock}>
             <img src={profile.photos.large ? profile.photos.large : userPhoto} alt={`Avator of ${profile.fullName}`} />
-            <p>{profile.lookingForAJobDescription}</p>
+            <ProfileStatus status={profile.lookingForAJobDescription} />
          </div>
       </div>
    )
