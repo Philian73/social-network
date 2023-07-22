@@ -60,8 +60,8 @@ const mapStateToProps = (state: AppStateType) => ({
 })
 
 export const UsersContainer = compose<ComponentType>(
-   withAuthRedirect,
    connect(mapStateToProps, { ...actions, getUsers, unfollow, follow }),
+   withAuthRedirect,
 )(UsersAPIContainer)
 
 
