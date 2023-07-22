@@ -13,7 +13,7 @@ const mapStateToProps = (state: AppStateType) => ({
 })
 
 export const PostsContainer = compose<ComponentType>(
-   connect(mapStateToProps, { ...actions })(Posts),
+   connect(mapStateToProps, { ...actions }),
 )(Posts)
 
 
