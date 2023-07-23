@@ -1,6 +1,12 @@
 import axios from 'axios'
 import { API_KEY } from './API_KEY'
-import { UserType } from '../redux/types'
+import { UserType } from 'redux/types'
+
+export type ResponseType<D = {}> = {
+   resultCode: number
+   messages: string[]
+   data: D
+}
 
 export type GetItemsType = {
    items: UserType[]
