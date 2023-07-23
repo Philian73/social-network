@@ -1,7 +1,9 @@
+import { reduxForm } from 'redux-form'
+import { Login } from 'components/Login/Login'
+
 import cls from 'components/Login/LoginForm/LoginForm.module.css'
 
 export const LoginForm = () => {
-
    return (
       <form className={cls.form}>
          <label htmlFor="login">
@@ -28,3 +30,7 @@ export const LoginForm = () => {
       </form>
    )
 }
+
+export const LoginReduxForm = reduxForm({
+   form: 'login'
+})(Login)
