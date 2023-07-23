@@ -1,7 +1,7 @@
 import { InferActionTypes } from './store'
 import { PostType, ProfileType } from './types'
 import { Dispatch } from 'redux'
-import { usersAPI } from 'api/usersAPI'
+import { profileAPI } from 'api/profileAPI'
 
 type ActionsType = InferActionTypes<typeof actions>
 
@@ -45,7 +45,7 @@ export const actions = {
 
 export const getUserProfile = (userID: number) => {
    return (dispatch: Dispatch) => {
-      usersAPI.getProfile(userID)
+      profileAPI.getProfile(userID)
          .then(response => {
             dispatch(actions.setUserProfile(response.data))
          })

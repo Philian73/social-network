@@ -16,8 +16,4 @@ export const usersAPI = {
          .delete(`follow/${userID}`)
          .then(response => response.data)
    },
-   getProfile: (userID: number) => {
-      return instance
-         .get(`profile/${userID}`)
-   }
 }
