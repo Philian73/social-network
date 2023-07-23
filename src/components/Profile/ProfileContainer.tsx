@@ -14,7 +14,7 @@ class ProfileAPIContainer extends Component<PropsType> {
       const { getUserProfile, match, getStatus } = this.props
       let userId = match.params.userId
 
-      if (!userId) userId = '2'
+      if (!userId) userId = '24156'
 
       getUserProfile(Number(userId))
       getStatus(Number(userId))

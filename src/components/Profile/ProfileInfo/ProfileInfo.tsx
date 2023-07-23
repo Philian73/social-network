@@ -8,12 +8,12 @@ import { Preloader } from 'components/common/Preloader/Preloader'
 import { ProfileStatus } from './ProfileStatus/ProfileStatus'
 
 import s from './ProfileInfo.module.css'
-import { Dispatch } from 'redux'
+import { UpdateStatusType } from 'redux/profileReducer'
 
 type PropsType = {
    profile: ProfileType | null
    status: string
-   updateStatus: (status: (string)) => (dispatch: Dispatch) => void
+   updateStatus: UpdateStatusType
 }
 export const ProfileInfo: FC<PropsType> = ({ profile, status, updateStatus }) => {
    return !profile ? (
@@ -25,7 +25,7 @@ export const ProfileInfo: FC<PropsType> = ({ profile, status, updateStatus }) =>
          </div>
          <div className={s.descriptionBlock}>
             <img src={profile.photos.large ? profile.photos.large : userPhoto} alt={`Avator of ${profile.fullName}`} />
-            <ProfileStatus status={status} />
+            <ProfileStatus status={status} updateStatus={updateStatus} />
          </div>
       </div>
    )
