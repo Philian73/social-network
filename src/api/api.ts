@@ -2,6 +2,12 @@ import axios from 'axios'
 import { API_KEY } from './API_KEY'
 import { UserType } from 'redux/types'
 
+export enum APIResultCodes {
+   SUCCESS = 0,
+   ERROR = 1,
+   CAPTCHA_ERROR = 10,
+}
+
 export type ResponseType<D = {}> = {
    resultCode: number
    messages: string[]
