@@ -12,12 +12,12 @@ import { Profile } from './Profile'
 class ProfileAPIContainer extends Component<PropsType> {
    componentDidMount() {
       const { getUserProfile, match, getStatus } = this.props
-      let userId = match.params.userId
+      let userId = Number(match.params.userId)
 
-      if (!userId) userId = '24156'
+      if (!userId) userId = 24156
 
-      getUserProfile(Number(userId))
-      getStatus(Number(userId))
+      getUserProfile(userId)
+      getStatus(userId)
    }
 
    render() {
