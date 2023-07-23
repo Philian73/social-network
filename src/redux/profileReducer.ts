@@ -4,10 +4,6 @@ import { Dispatch } from 'redux'
 import { profileAPI } from 'api/profileAPI'
 import { APIResultCodes } from 'api/api'
 
-type ActionsType = InferActionTypes<typeof actions>
-
-type InitialStateType = typeof initialState
-
 const initialState = {
    posts: [
       { id: 1, message: 'Hi, how are you?', likesCount: 15 },
@@ -77,3 +73,8 @@ export const thunks = {
    },
 }
 
+type ActionsType = InferActionTypes<typeof actions>
+
+type InitialStateType = typeof initialState
+
+export type UpdateStatusType = typeof thunks['updateStatus']
