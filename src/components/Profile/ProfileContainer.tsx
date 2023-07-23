@@ -4,19 +4,20 @@ import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
 import { AppStateType } from 'redux/store'
-import { actions, getUserProfile } from 'redux/profileReducer'
+import { actions, thunks } from 'redux/profileReducer'
 
 import { withAuthRedirect } from 'hoc/withAuthRedirect'
 import { Profile } from './Profile'
 
 class ProfileAPIContainer extends Component<PropsType> {
    componentDidMount() {
-      const { getUserProfile, match } = this.props
+      const { getUserProfile, match, getStatus } = this.props
       let userId = match.params.userId
 
       if (!userId) userId = '2'
 
-      getUserProfile(userId)
+      getUserProfile(Number(userId))
+      getStatus(Number(userId))
    }
 
    render() {
@@ -26,10 +27,11 @@ class ProfileAPIContainer extends Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType) => ({
    profile: state.profilePage.profile,
+   status: state.profilePage.status
 })
 
 export const ProfileContainer = compose<ComponentType>(
-   connect(mapStateToProps, { ...actions, getUserProfile }),
+   connect(mapStateToProps, { ...actions, ...thunks }),
    withRouter,
    // withAuthRedirect,
 )(ProfileAPIContainer)
@@ -41,7 +43,7 @@ type PathParamsType = {
 }
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
-type MapDispatchPropsType = typeof actions & { getUserProfile: any }
+type MapDispatchPropsType = typeof actions & typeof thunks
 
 export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 

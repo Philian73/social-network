@@ -8,11 +8,14 @@ import { Preloader } from 'components/common/Preloader/Preloader'
 import { ProfileStatus } from './ProfileStatus/ProfileStatus'
 
 import s from './ProfileInfo.module.css'
+import { Dispatch } from 'redux'
 
 type PropsType = {
    profile: ProfileType | null
+   status: string
+   updateStatus: (status: (string)) => (dispatch: Dispatch) => void
 }
-export const ProfileInfo: FC<PropsType> = ({ profile }) => {
+export const ProfileInfo: FC<PropsType> = ({ profile, status, updateStatus }) => {
    return !profile ? (
       <Preloader />
    ) : (
@@ -22,7 +25,7 @@ export const ProfileInfo: FC<PropsType> = ({ profile }) => {
          </div>
          <div className={s.descriptionBlock}>
             <img src={profile.photos.large ? profile.photos.large : userPhoto} alt={`Avator of ${profile.fullName}`} />
-            <ProfileStatus status={profile.lookingForAJobDescription} />
+            <ProfileStatus status={status} />
          </div>
       </div>
    )

@@ -7,10 +7,10 @@ import { PostsContainer } from './Posts/PostsContainer'
 import { ProfilePropsType } from './ProfileContainer'
 
 
-export const Profile: FC<ProfilePropsType> = ({ profile }) => {
+export const Profile: FC<ProfilePropsType> = ({ profile, status, updateStatus }) => {
    return (
       <div>
-         <ProfileInfo profile={profile} />
+         <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} />
          <PostsContainer />
       </div>
    )
