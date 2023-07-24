@@ -9,7 +9,6 @@ import { Posts } from './Posts'
 
 const mapStateToProps = (state: AppStateType) => ({
    posts: state.profilePage.posts,
-   newPostText: state.profilePage.newPostText
 })
 
 export const PostsContainer = compose<ComponentType>(
