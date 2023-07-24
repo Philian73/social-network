@@ -9,21 +9,21 @@ const initialState = {
       { id: 1, message: 'Hi, how are you?', likesCount: 15 },
       { id: 2, message: 'It\'s my first post', likesCount: 20 },
    ] as PostType[],
-   newPostText: '',
    profile: null as ProfileType | null,
    status: ''
 }
 
 export const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
-      case 'UPDATE-NEW-POST-TEXT':
-         return { ...state, newPostText: action.payload.newText }
       case 'ADD-POST':
-         if (state.newPostText.trim()) {
+         if (action.payload.newPostText.trim()) {
             return {
                ...state,
-               posts: [...state.posts, { id: state.posts.length + 1, message: state.newPostText, likesCount: 0 }],
-               newPostText: '',
+               posts: [...state.posts, {
+                  id: state.posts.length + 1,
+                  message: action.payload.newPostText,
+                  likesCount: 0
+               }],
             }
          } else {
             return state
@@ -38,8 +38,7 @@ export const profileReducer = (state = initialState, action: ActionsType): Initi
 }
 
 export const actions = {
-   updateNewPostText: (text: string) => ({ type: 'UPDATE-NEW-POST-TEXT', payload: { newText: text } } as const),
-   addPost: () => ({ type: 'ADD-POST' } as const),
+   addPost: (newPostText: string) => ({ type: 'ADD-POST', payload: { newPostText } } as const),
    setUserProfile: (profile: ProfileType) => ({ type: 'SET-USER-PROFILE', payload: { profile } } as const),
    setStatus: (status: string) => ({ type: 'SET-STATUS', payload: { status } } as const),
 }
