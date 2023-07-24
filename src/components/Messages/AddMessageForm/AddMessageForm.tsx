@@ -1,6 +1,6 @@
 import { Field, reduxForm } from 'redux-form'
 
-export const AddMessageReduxForm = reduxForm<{ newMessageBody: string }>({
+export const AddMessageReduxForm = reduxForm<AddMessageFormData>({
    form: 'dialogAddMessageForm',
 })(({ handleSubmit }) => {
    return (
@@ -15,3 +15,9 @@ export const AddMessageReduxForm = reduxForm<{ newMessageBody: string }>({
       </form>
    )
 })
+
+
+// TYPES
+export type AddMessageFormData = {
+   newMessageBody: string
+}
