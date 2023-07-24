@@ -1,10 +1,11 @@
-import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 
 import cls from 'components/Login/LoginForm/LoginForm.module.css'
-import { FC } from 'react'
 import { LoginParamsType } from 'api/authAPI'
 
-export const LoginForm: FC<InjectedFormProps<LoginParamsType>> = ({ handleSubmit }) => {
+export const LoginReduxForm = reduxForm<LoginParamsType>({
+   form: 'login',
+})(({ handleSubmit }) => {
    return (
       <form onSubmit={handleSubmit} className={cls.form}>
          <label htmlFor="email">
@@ -34,8 +35,4 @@ export const LoginForm: FC<InjectedFormProps<LoginParamsType>> = ({ handleSubmit
          <button>Log In</button>
       </form>
    )
-}
-
-export const LoginReduxForm = reduxForm<LoginParamsType>({
-   form: 'login'
-})(LoginForm)
+})
