@@ -12,7 +12,7 @@ export const Textarea: FC<WrappedFieldProps> = ({ input, meta, ...rest }) => {
    return (
       <div className={textareaStyles}>
          <textarea {...input} {...rest} />
-         {hasError || hasWarn && <span>{meta.warning}</span>}
+         {(hasError || hasWarn) && <span>{meta.warning}</span>}
       </div>
    )
 }
