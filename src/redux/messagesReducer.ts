@@ -30,19 +30,15 @@ const initialState = {
       { id: 4, message: 'Yo' },
       { id: 5, message: 'Yo' },
    ] as MessageType[],
-   newMessageBody: '',
 }
 
 export const messagesReducer = (state = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
-      case 'UPDATE-NEW-MESSAGE-BODY':
-         return { ...state, newMessageBody: action.payload.body }
       case 'SEND-MESSAGE':
-         if (state.newMessageBody.trim()) {
+         if (action.payload.newMessageBody.trim()) {
             return {
                ...state,
-               messages: [...state.messages, { id: state.messages.length + 1, message: state.newMessageBody }],
-               newMessageBody: '',
+               messages: [...state.messages, { id: state.messages.length + 1, message: action.payload.newMessageBody }],
             }
          } else {
             return state
@@ -53,6 +49,5 @@ export const messagesReducer = (state = initialState, action: ActionsType): Init
 }
 
 export const actions = {
-   updateNewMessageBody: (text: string) => ({ type: 'UPDATE-NEW-MESSAGE-BODY', payload: { body: text } } as const),
-   sendMessage: () => ({ type: 'SEND-MESSAGE' } as const)
+   sendMessage: (newMessageBody: string) => ({ type: 'SEND-MESSAGE', payload: { newMessageBody } } as const),
 }
