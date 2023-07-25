@@ -2,7 +2,7 @@ import { Field, reduxForm } from 'redux-form'
 import { maxLength, minLength, requiredField } from 'utils/validators'
 import { Textarea } from 'components/common/Textarea/Textarea'
 
-const maxLength150 = maxLength(150)
+const maxLength300 = maxLength(300)
 const minLength5 = minLength(5)
 
 export const AddPostReduxForm = reduxForm<AddPostFormData>({
@@ -11,7 +11,7 @@ export const AddPostReduxForm = reduxForm<AddPostFormData>({
    return (
       <form onSubmit={handleSubmit}>
          <Field component={Textarea}
-                validate={[requiredField, minLength5, maxLength150]}
+                validate={[requiredField, minLength5, maxLength300]}
                 name="newPostText"
                 placeholder="Post message"
          />
