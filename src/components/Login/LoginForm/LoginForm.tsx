@@ -2,6 +2,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import cls from 'components/Login/LoginForm/LoginForm.module.css'
 import { LoginParamsType } from 'api/authAPI'
+import { Input } from 'components/common/Input/Input'
 
 export const LoginReduxForm = reduxForm<LoginParamsType>({
    form: 'login',
@@ -9,7 +10,7 @@ export const LoginReduxForm = reduxForm<LoginParamsType>({
    return (
       <form onSubmit={handleSubmit} className={cls.form}>
          <label htmlFor="email">
-            <Field component="input"
+            <Field component={Input}
                    type="text"
                    id="email"
                    name="email"
@@ -17,7 +18,7 @@ export const LoginReduxForm = reduxForm<LoginParamsType>({
             />
          </label>
          <label htmlFor="password">
-            <Field component="input"
+            <Field component={Input}
                    type="password"
                    id="password"
                    name="password"
@@ -25,7 +26,7 @@ export const LoginReduxForm = reduxForm<LoginParamsType>({
             />
          </label>
          <label htmlFor="rememberMe">
-            <Field component="input"
+            <Field component={Input}
                    type="checkbox"
                    id="rememberMe"
                    name="rememberMe"
