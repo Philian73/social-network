@@ -8,9 +8,9 @@ export const AddMessageReduxForm = reduxForm<AddMessageFormData>({
    return (
       <form onSubmit={handleSubmit}>
          <Field component={Textarea}
+                validate={[requiredField]}
                 name="newMessageBody"
                 placeholder="Enter your message"
-                validate={[requiredField]}
          />
          <div>
             <button disabled={invalid}>Send</button>
