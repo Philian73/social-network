@@ -11,7 +11,7 @@ export const AddPostReduxForm = reduxForm<AddPostFormData>({
    return (
       <form onSubmit={handleSubmit}>
          <Field component={Textarea}
-                warn={[requiredField, minLength5, maxLength150]}
+                validate={[requiredField, minLength5, maxLength150]}
                 name="newPostText"
                 placeholder="Post message"
          />
