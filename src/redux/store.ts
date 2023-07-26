@@ -1,5 +1,5 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import { AnyAction, applyMiddleware, combineReducers, createStore } from 'redux'
+import thunkMiddleware, { ThunkAction } from 'redux-thunk'
 
 import { reducer as formReducer } from 'redux-form'
 
@@ -11,6 +11,8 @@ import { AuthReducer } from './authReducer'
 export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 
 export type AppStateType = ReturnType<typeof rootReducer>
+
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AnyAction>
 
 const rootReducer = combineReducers({
    profilePage: profileReducer,
