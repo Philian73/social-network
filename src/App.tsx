@@ -3,7 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 
-import { authThunks } from 'redux/authReducer'
+import { appThunks } from 'redux/appReducer'
 
 import { Navbar } from 'components/Navbar/Navbar'
 import { News } from 'components/News/News'
@@ -16,23 +16,31 @@ import { HeaderContainer } from 'components/Header/HeaderContainer'
 import { LoginContainer } from 'components/Login/LoginContainer'
 
 import './styles/App.css'
+import { AppStateType } from 'redux/store'
+import { Preloader } from 'components/common/Preloader/Preloader'
+
+const mapStateToProps = (state: AppStateType) => ({
+   isInitialized: state.app.isInitialized,
+})
 
 const mapDispatchToProps = {
-   getAuthUserData: authThunks.getAuthUserData
+   initialization: appThunks.initialization
 }
 
 export const App = compose<ComponentType>(
-   connect(null, mapDispatchToProps),
+   connect(mapStateToProps, mapDispatchToProps),
    withRouter,
 )(class extends Component<AppPropsType> {
    componentDidMount() {
-      const { getAuthUserData } = this.props
+      const { initialization } = this.props
 
-      getAuthUserData()
+      initialization()
    }
 
    render() {
-      return (
+      return !this.props.isInitialized ? (
+         <Preloader />
+      ) : (
          <div className="wrapper">
             <HeaderContainer />
             <Navbar />
@@ -60,8 +68,9 @@ export const App = compose<ComponentType>(
 })
 
 // TYPES
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = typeof mapDispatchToProps
 
-type AppPropsType = MapDispatchPropsType
+type AppPropsType = MapStatePropsType & MapDispatchPropsType
 
 export default App
