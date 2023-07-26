@@ -32,9 +32,9 @@ export const authActions = {
 }
 
 export const authThunks = {
-   getAuthUserData(): AppThunkType {
+   getAuthUserData(): AppThunkType<Promise<void>> {
       return dispatch => {
-         authAPI.me()
+         return authAPI.me()
             .then(response => {
                if (response.data.resultCode === 0) {
                   const { id, login, email } = response.data.data
