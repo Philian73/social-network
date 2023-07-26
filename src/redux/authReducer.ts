@@ -1,6 +1,9 @@
-import { authAPI, LoginParamsType } from 'api/authAPI'
-import { AppThunkType, InferActionTypes } from './store'
+import { stopSubmit } from 'redux-form'
+
 import { APIResultCodes } from 'api/api'
+import { authAPI, LoginParamsType } from 'api/authAPI'
+
+import { AppThunkType, InferActionTypes } from './store'
 
 const initialState = {
    id: null as (number | null),
@@ -46,6 +49,10 @@ export const authThunks = {
             .then(response => {
                if (response.data.resultCode === APIResultCodes.SUCCESS) {
                   dispatch(authThunks.getAuthUserData())
+               } else {
+                  const message = response.data.messages.length ? response.data.messages[0] : 'Some error'
+
+                  dispatch(stopSubmit('login', { _error: message }))
                }
             })
       }
