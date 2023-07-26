@@ -6,15 +6,18 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { AppStateType } from 'redux/store'
 import { actions, thunks } from 'redux/profileReducer'
 
-import { withAuthRedirect } from 'hoc/withAuthRedirect'
 import { Profile } from './Profile'
 
 class ProfileAPIContainer extends Component<PropsType> {
    componentDidMount() {
-      const { getUserProfile, match, getStatus, authorizedUserId } = this.props
+      const { getUserProfile, match, getStatus, authorizedUserId, history } = this.props
       let userId = Number(match.params.userId)
 
-      if (!userId && authorizedUserId) userId = authorizedUserId
+      if (!userId && authorizedUserId) {
+         userId = authorizedUserId
+      } else if (!userId && !authorizedUserId) {
+         history.push('/login')
+      }
 
       getUserProfile(userId)
       getStatus(userId)
@@ -35,7 +38,6 @@ const mapStateToProps = (state: AppStateType) => ({
 export const ProfileContainer = compose<ComponentType>(
    connect(mapStateToProps, { ...actions, ...thunks }),
    withRouter,
-   // withAuthRedirect,
 )(ProfileAPIContainer)
 
 
