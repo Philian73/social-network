@@ -6,12 +6,16 @@ import { authThunks } from 'redux/authReducer'
 
 import { Login } from 'components/Login/Login'
 
+const mapDispatchToProps = {
+   logIn: authThunks.logIn
+}
+
 export const LoginContainer = compose<ComponentType>(
-   connect(null, { logIn: authThunks.logIn })
+   connect(null, mapDispatchToProps)
 )(Login)
 
-type MapDispatchPropsType = {
-   logIn: typeof authThunks['logIn']
-}
+
+// TYPES
+type MapDispatchPropsType = typeof mapDispatchToProps
 
 export type LoginPropsType = MapDispatchPropsType
