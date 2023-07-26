@@ -1,5 +1,5 @@
 import { Component, ComponentType } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 
@@ -22,7 +22,8 @@ const mapDispatchToProps = {
 }
 
 export const App = compose<ComponentType>(
-   connect(null, mapDispatchToProps)
+   connect(null, mapDispatchToProps),
+   withRouter,
 )(class extends Component<AppPropsType> {
    componentDidMount() {
       const { getAuthUserData } = this.props
