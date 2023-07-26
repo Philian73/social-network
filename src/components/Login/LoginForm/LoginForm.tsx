@@ -11,7 +11,7 @@ const minPasswordLength = minLength(4)
 
 export const LoginReduxForm = reduxForm<LoginParamsType>({
    form: 'login',
-})(({ handleSubmit }) => {
+})(({ handleSubmit, error }) => {
    return (
       <form onSubmit={handleSubmit} className={cls.form}>
          <label htmlFor="email">
@@ -40,6 +40,9 @@ export const LoginReduxForm = reduxForm<LoginParamsType>({
             />
             <span>Remember Me</span>
          </label>
+         {error && <div className={cls.summaryError}>
+            <span>{error}</span>
+         </div>}
          <button>Log In</button>
       </form>
    )
