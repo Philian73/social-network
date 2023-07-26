@@ -11,10 +11,10 @@ import { Profile } from './Profile'
 
 class ProfileAPIContainer extends Component<PropsType> {
    componentDidMount() {
-      const { getUserProfile, match, getStatus } = this.props
+      const { getUserProfile, match, getStatus, authorizedUserId } = this.props
       let userId = Number(match.params.userId)
 
-      if (!userId) userId = 24156
+      if (!userId && authorizedUserId) userId = authorizedUserId
 
       getUserProfile(userId)
       getStatus(userId)
@@ -27,7 +27,9 @@ class ProfileAPIContainer extends Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType) => ({
    profile: state.profilePage.profile,
-   status: state.profilePage.status
+   status: state.profilePage.status,
+   authorizedUserId: state.auth.id,
+   isAuth: state.auth.isAuth,
 })
 
 export const ProfileContainer = compose<ComponentType>(
