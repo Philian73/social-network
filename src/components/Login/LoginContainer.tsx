@@ -5,17 +5,23 @@ import { connect } from 'react-redux'
 import { authThunks } from 'redux/authReducer'
 
 import { Login } from 'components/Login/Login'
+import { AppStateType } from 'redux/store'
+
+const mapStateToProps = (state: AppStateType) => ({
+   isAuth: state.auth.isAuth
+})
 
 const mapDispatchToProps = {
    logIn: authThunks.logIn
 }
 
 export const LoginContainer = compose<ComponentType>(
-   connect(null, mapDispatchToProps)
+   connect(mapStateToProps, mapDispatchToProps)
 )(Login)
 
 
 // TYPES
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = typeof mapDispatchToProps
 
-export type LoginPropsType = MapDispatchPropsType
+export type LoginPropsType = MapStatePropsType & MapDispatchPropsType
