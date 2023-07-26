@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-import s from './Header.module.css'
-
 import { HeaderPropsType } from './HeaderContainer'
+
+import s from './Header.module.css'
 
 export const Header: FC<HeaderPropsType> = ({ isAuth, login, logOut }) => {
    const handleLogOut = () => logOut()
