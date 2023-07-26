@@ -2,3 +2,10 @@
     display: block;
     margin-bottom: 0.5rem;
 }
+
+.summaryError {
+    border: 1px solid red;
+    padding: 5px;
+    color: red;
+    max-width: 320px;
+}
