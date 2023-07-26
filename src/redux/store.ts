@@ -7,6 +7,7 @@ import { profileReducer } from './profileReducer'
 import { messagesReducer } from './messagesReducer'
 import { usersReducer } from './usersReducer'
 import { AuthReducer } from './authReducer'
+import { appReducer } from 'redux/appReducer'
 
 export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 
@@ -15,6 +16,7 @@ export type AppStateType = ReturnType<typeof rootReducer>
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AnyAction>
 
 const rootReducer = combineReducers({
+   app: appReducer,
    profilePage: profileReducer,
    messagesPage: messagesReducer,
    usersPage: usersReducer,
