@@ -1,5 +1,5 @@
 import { ChangeEvent, Component, FocusEvent } from 'react'
-import { UpdateStatusType } from 'redux/profileReducer'
+import { UpdateStatusType } from 'redux/reducers/profileReducer'
 
 export class ProfileStatus extends Component<PropsType, StateType> {
    state: StateType = {

@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 
 import { AppStateType } from 'redux/store'
-import { actions, follow, getUsers, unfollow } from 'redux/usersReducer'
+import { actions, follow, getUsers, unfollow } from 'redux/reducers/usersReducer'
 
 import { Preloader } from 'components/common/Preloader/Preloader'
 import { Users } from './Users'
@@ -49,6 +49,15 @@ class UsersAPIContainer extends Component<UsersPropsType> {
       )
    }
 }
+
+// const mapStateToProps = (state: AppStateType) => ({
+//    users: state.usersPage.users,
+//    pageSize: state.usersPage.pageSize,
+//    totalUsersCount: state.usersPage.totalUsersCount,
+//    currentPage: state.usersPage.currentPage,
+//    isFetching: state.usersPage.isFetching,
+//    followingInProgress: state.usersPage.followingInProgress,
+// })
 
 const mapStateToProps = (state: AppStateType) => ({
    users: state.usersPage.users,

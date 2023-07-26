@@ -1,6 +1,6 @@
-import { InferActionTypes } from './store'
+import { InferActionTypes } from 'redux/store'
 import { Dispatch } from 'redux'
-import { UserType } from './types'
+import { UserType } from 'redux/types'
 
 import { usersAPI } from 'api/usersAPI'
 

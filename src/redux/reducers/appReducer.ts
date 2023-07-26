@@ -1,5 +1,5 @@
 import { AppThunkType, InferActionTypes } from 'redux/store'
-import { authThunks } from 'redux/authReducer'
+import { authThunks } from 'redux/reducers/authReducer'
 
 const initialState = {
    isInitialized: false

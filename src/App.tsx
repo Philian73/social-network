@@ -3,7 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 
-import { appThunks } from 'redux/appReducer'
+import { appThunks } from 'redux/reducers/appReducer'
 
 import { Navbar } from 'components/Navbar/Navbar'
 import { News } from 'components/News/News'

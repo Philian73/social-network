@@ -3,7 +3,7 @@ import { stopSubmit } from 'redux-form'
 import { APIResultCodes } from 'api/api'
 import { authAPI, LoginParamsType } from 'api/authAPI'
 
-import { AppThunkType, InferActionTypes } from './store'
+import { AppThunkType, InferActionTypes } from 'redux/store'
 
 const initialState = {
    id: null as (number | null),

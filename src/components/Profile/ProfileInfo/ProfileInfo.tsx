@@ -8,7 +8,7 @@ import { Preloader } from 'components/common/Preloader/Preloader'
 import { ProfileStatus } from './ProfileStatus/ProfileStatus'
 
 import s from './ProfileInfo.module.css'
-import { UpdateStatusType } from 'redux/profileReducer'
+import { UpdateStatusType } from 'redux/reducers/profileReducer'
 
 type PropsType = {
    profile: ProfileType | null

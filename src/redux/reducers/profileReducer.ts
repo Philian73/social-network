@@ -1,5 +1,5 @@
-import { InferActionTypes } from './store'
-import { PostType, ProfileType } from './types'
+import { InferActionTypes } from 'redux/store'
+import { PostType, ProfileType } from 'redux/types'
 import { Dispatch } from 'redux'
 import { profileAPI } from 'api/profileAPI'
 import { APIResultCodes } from 'api/api'

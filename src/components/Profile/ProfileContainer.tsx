@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
 import { AppStateType } from 'redux/store'
-import { actions, thunks } from 'redux/profileReducer'
+import { actions, thunks } from 'redux/reducers/profileReducer'
 
 import { Profile } from './Profile'
 

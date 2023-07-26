@@ -1,4 +1,4 @@
-import { InferActionTypes } from './store'
+import { InferActionTypes } from 'redux/store'
 
 type ActionsType = InferActionTypes<typeof actions>
 

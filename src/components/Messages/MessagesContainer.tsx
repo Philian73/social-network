@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 
 import { AppStateType } from 'redux/store'
-import { actions } from 'redux/messagesReducer'
+import { actions } from 'redux/reducers/messagesReducer'
 
 import { Messages } from './Messages'
 import { withAuthRedirect } from 'hoc/withAuthRedirect'

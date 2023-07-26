@@ -3,11 +3,11 @@ import thunkMiddleware, { ThunkAction } from 'redux-thunk'
 
 import { reducer as formReducer } from 'redux-form'
 
-import { profileReducer } from './profileReducer'
-import { messagesReducer } from './messagesReducer'
-import { usersReducer } from './usersReducer'
-import { AuthReducer } from './authReducer'
-import { appReducer } from 'redux/appReducer'
+import { profileReducer } from 'redux/reducers/profileReducer'
+import { messagesReducer } from 'redux/reducers/messagesReducer'
+import { usersReducer } from 'redux/reducers/usersReducer'
+import { AuthReducer } from 'redux/reducers/authReducer'
+import { appReducer } from 'redux/reducers/appReducer'
 
 export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 

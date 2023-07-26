@@ -2,7 +2,7 @@ import { ComponentType } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 
-import { authThunks } from 'redux/authReducer'
+import { authThunks } from 'redux/reducers/authReducer'
 
 import { Login } from 'components/Login/Login'
 import { AppStateType } from 'redux/store'

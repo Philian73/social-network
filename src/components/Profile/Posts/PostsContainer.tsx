@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 
 import { AppStateType } from 'redux/store'
-import { actions } from 'redux/profileReducer'
+import { actions } from 'redux/reducers/profileReducer'
 
 import { Posts } from './Posts'
 
