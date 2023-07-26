@@ -13,6 +13,9 @@ export const authAPI = {
          LoginParamsType
       >('auth/login', data)
    },
+   logOut() {
+      return instance.delete<ResponseType>('auth/login')
+   },
 }
 
 // TYPES
