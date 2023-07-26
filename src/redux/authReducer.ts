@@ -50,7 +50,7 @@ export const authThunks = {
             })
       }
    },
-   logOut(data: LoginParamsType): AppThunkType {
+   logOut(): AppThunkType {
       return dispatch => {
          authAPI.logOut()
             .then(response => {
