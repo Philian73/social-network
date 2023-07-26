@@ -1,9 +1,13 @@
-import { LoginReduxForm } from 'components/Login/LoginForm/LoginForm'
+import { FC } from 'react'
+
 import { LoginParamsType } from 'api/authAPI'
 
-export const Login = () => {
+import { LoginReduxForm } from 'components/Login/LoginForm/LoginForm'
+import { LoginPropsType } from 'components/Login/LoginContainer'
+
+export const Login: FC<LoginPropsType> = ({ logIn }) => {
    const onSubmit = (formData: LoginParamsType) => {
-      console.log(formData)
+      logIn(formData)
    }
    return (
       <div>

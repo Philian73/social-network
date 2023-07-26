@@ -50,6 +50,16 @@ export const authThunks = {
             })
       }
    },
+   logOut(data: LoginParamsType): AppThunkType {
+      return dispatch => {
+         authAPI.logOut()
+            .then(response => {
+               if (response.data.resultCode === APIResultCodes.SUCCESS) {
+                  dispatch(authActions.setAuthUserData(null, null, null, false))
+               }
+            })
+      }
+   },
 }
 
 
