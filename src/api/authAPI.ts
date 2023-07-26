@@ -1,10 +1,18 @@
-import { instance } from './api'
+import { AxiosResponse } from 'axios'
+
+import { instance, ResponseType } from './api'
 
 export const authAPI = {
-   me: () => {
-      return instance
-         .get(`auth/me`)
-   }
+   me() {
+      return instance.get(`auth/me`)
+   },
+   logIn(data: LoginParamsType) {
+      return instance.post<
+         null,
+         AxiosResponse<ResponseType<{ userId: number }>>,
+         LoginParamsType
+      >('auth/login', data)
+   },
 }
 
 // TYPES
