@@ -1,12 +1,7 @@
-import { InferActionTypes } from 'redux/store'
-import { Dispatch } from 'redux'
+import { AppThunkType, InferActionTypes } from 'redux/store'
 import { UserType } from 'redux/types'
 
 import { usersAPI } from 'api/usersAPI'
-
-type ActionsType = InferActionTypes<typeof actions>
-
-type InitialStateType = typeof initialState
 
 const initialState = {
    users: [] as UserType[],
@@ -49,7 +44,7 @@ export const usersReducer = (state = initialState, action: ActionsType): Initial
    }
 }
 
-export const actions = {
+export const usersActions = {
    setUsers: (users: UserType[]) => ({ type: 'SET-USERS', payload: { users } } as const),
    setTotalUsersCount: (count: number) => ({ type: 'SET-USERS-TOTAL-COUNT', payload: { count } } as const),
    setCurrentPage: (currentPage: number) => ({ type: 'SET-CURRENT-PAGE', payload: { currentPage } } as const),
@@ -62,45 +57,50 @@ export const actions = {
    } as const),
 }
 
-export const getUsers = (currentPage: number, pageSize: number) => {
-   return (dispatch: Dispatch<ActionsType>) => {
-      dispatch(actions.toggleIsFetching(true))
+export const usersThunks = {
+   fetchUsers(currentPage: number, pageSize: number): AppThunkType {
+      return dispatch => {
+         dispatch(usersActions.toggleIsFetching(true))
 
-      usersAPI.getUsers(currentPage, pageSize)
-         .then(data => {
-            dispatch(actions.toggleIsFetching(false))
-            dispatch(actions.setUsers(data.items))
-            dispatch(actions.setTotalUsersCount(data.totalCount))
-         })
-   }
+         usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+               dispatch(usersActions.toggleIsFetching(false))
+               dispatch(usersActions.setUsers(data.items))
+               dispatch(usersActions.setTotalUsersCount(data.totalCount))
+            })
+      }
+   },
+   follow(userID: number): AppThunkType {
+      return dispatch => {
+         dispatch(usersActions.toggleFollowingInProgress(userID, true))
+
+         usersAPI.follow(userID)
+            .then(data => {
+               if (data.resultCode === 0) {
+                  dispatch(usersActions.followSuccess(userID))
+               }
+
+               dispatch(usersActions.toggleFollowingInProgress(userID, false))
+            })
+      }
+   },
+   unfollow(userID: number): AppThunkType {
+      return dispatch => {
+         dispatch(usersActions.toggleFollowingInProgress(userID, true))
+
+         usersAPI.unfollow(userID)
+            .then(data => {
+               if (data.resultCode === 0) {
+                  dispatch(usersActions.unfollowSuccess(userID))
+               }
+
+               dispatch(usersActions.toggleFollowingInProgress(userID, false))
+            })
+      }
+   },
 }
 
-export const follow = (userID: number) => {
-   return (dispatch: Dispatch<ActionsType>) => {
-      dispatch(actions.toggleFollowingInProgress(userID, true))
+// TYPES
+type InitialStateType = typeof initialState
 
-      usersAPI.follow(userID)
-         .then(data => {
-            if (data.resultCode === 0) {
-               dispatch(actions.followSuccess(userID))
-            }
-
-            dispatch(actions.toggleFollowingInProgress(userID, false))
-         })
-   }
-}
-
-export const unfollow = (userID: number) => {
-   return (dispatch: Dispatch<ActionsType>) => {
-      dispatch(actions.toggleFollowingInProgress(userID, true))
-
-      usersAPI.unfollow(userID)
-         .then(data => {
-            if (data.resultCode === 0) {
-               dispatch(actions.unfollowSuccess(userID))
-            }
-
-            dispatch(actions.toggleFollowingInProgress(userID, false))
-         })
-   }
-}
+type ActionsType = InferActionTypes<typeof usersActions>
