@@ -10,24 +10,14 @@ export const ProfileStatus: FC<PropsType> = ({ status, updateStatus }) => {
    const [editMode, setEditMode] = useState(false)
    const [statusInput, setStatusInput] = useState(status)
 
-   const activateEditMode = () => {
-      if (editMode) return
-
+   const toggleEditMode = () => {
       if (status !== statusInput) {
-         setStatusInput(status)
+         editMode
+            ? updateStatus(statusInput)
+            : setStatusInput(status)
       }
 
-      setEditMode(true)
-   }
-
-   const deactivateEditMode = () => {
-      if (!editMode) return
-
-      if (status !== statusInput) {
-         updateStatus(statusInput)
-      }
-
-      setEditMode(false)
+      setEditMode(!editMode)
    }
 
    const onStatusInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +29,7 @@ export const ProfileStatus: FC<PropsType> = ({ status, updateStatus }) => {
 
    return !editMode ? (
       <div>
-         <span onDoubleClick={activateEditMode}>{status}</span>
+         <span onDoubleClick={toggleEditMode}>{status}</span>
       </div>
    ) : (
       <div>
@@ -47,7 +37,7 @@ export const ProfileStatus: FC<PropsType> = ({ status, updateStatus }) => {
                 onChange={onStatusInputChange}
                 autoFocus
                 onFocus={onStatusInputFocus}
-                onBlur={deactivateEditMode}
+                onBlur={toggleEditMode}
          />
       </div>
    )
