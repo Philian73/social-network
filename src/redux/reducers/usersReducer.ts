@@ -58,11 +58,12 @@ export const usersActions = {
 }
 
 export const usersThunks = {
-   fetchUsers(currentPage: number, pageSize: number): AppThunkType {
+   fetchUsers(page: number, pageSize: number): AppThunkType {
       return dispatch => {
          dispatch(usersActions.toggleIsFetching(true))
-
-         usersAPI.getUsers(currentPage, pageSize)
+         dispatch(usersActions.setCurrentPage(page))
+         
+         usersAPI.getUsers(page, pageSize)
             .then(data => {
                dispatch(usersActions.toggleIsFetching(false))
                dispatch(usersActions.setUsers(data.items))
