@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { PostsPropsType } from './PostsContainer'
 import { Post } from './Post/Post'
@@ -7,7 +7,7 @@ import { AddPostFormData, AddPostReduxForm } from 'components/Profile/Posts/AddP
 import s from './Posts.module.css'
 
 
-export const Posts: FC<PostsPropsType> = ({ posts, addPost }) => {
+export const Posts: FC<PostsPropsType> = memo(({ posts, addPost }) => {
    const addNewPost = (formData: AddPostFormData) => {
       addPost(formData.newPostText)
    }
@@ -24,4 +24,4 @@ export const Posts: FC<PostsPropsType> = ({ posts, addPost }) => {
          </div>
       </div>
    )
-}
+})
