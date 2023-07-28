@@ -4,11 +4,26 @@ import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
 import { AppStateType } from 'redux/store'
-import { actions, thunks } from 'redux/reducers/profileReducer'
+import { profileActions, profileThunks } from 'redux/reducers/profileReducer'
 
 import { Profile } from './Profile'
 
-class ProfileAPIContainer extends Component<PropsType> {
+const mapStateToProps = (state: AppStateType) => ({
+   profile: state.profilePage.profile,
+   status: state.profilePage.status,
+   authorizedUserId: state.auth.id,
+   isAuth: state.auth.isAuth,
+})
+
+const mapDispatchToProps = {
+   ...profileActions,
+   ...profileThunks,
+}
+
+export const ProfileContainer = compose<ComponentType>(
+   connect(mapStateToProps, mapDispatchToProps),
+   withRouter,
+)(class extends Component<PropsType> {
    componentDidMount() {
       const { getUserProfile, match, getStatus, authorizedUserId, history } = this.props
       let userId = Number(match.params.userId)
@@ -26,19 +41,7 @@ class ProfileAPIContainer extends Component<PropsType> {
    render() {
       return <Profile {...this.props} />
    }
-}
-
-const mapStateToProps = (state: AppStateType) => ({
-   profile: state.profilePage.profile,
-   status: state.profilePage.status,
-   authorizedUserId: state.auth.id,
-   isAuth: state.auth.isAuth,
 })
-
-export const ProfileContainer = compose<ComponentType>(
-   connect(mapStateToProps, { ...actions, ...thunks }),
-   withRouter,
-)(ProfileAPIContainer)
 
 
 // TYPES
@@ -47,7 +50,7 @@ type PathParamsType = {
 }
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
-type MapDispatchPropsType = typeof actions & typeof thunks
+type MapDispatchPropsType = typeof mapDispatchToProps
 
 export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 
