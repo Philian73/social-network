@@ -1,15 +1,15 @@
-import { InferActionTypes } from 'redux/store'
-import { PostType, ProfileType } from 'redux/types'
-import { Dispatch } from 'redux'
-import { profileAPI } from 'api/profileAPI'
 import { APIResultCodes } from 'api/api'
+import { profileAPI } from 'api/profileAPI'
+import { PostType, ProfileType } from 'redux/types'
+import { AppThunkType, InferActionTypes } from 'redux/store'
+
 
 const initialState = {
    posts: [
       { id: 1, message: 'Hi, how are you?', likesCount: 15 },
       { id: 2, message: 'It\'s my first post', likesCount: 20 },
    ] as PostType[],
-   profile: null as ProfileType | null,
+   profile: null as (ProfileType | null),
    status: ''
 }
 
@@ -37,43 +37,43 @@ export const profileReducer = (state = initialState, action: ActionsType): Initi
    }
 }
 
-export const actions = {
+export const profileActions = {
    addPost: (newPostText: string) => ({ type: 'ADD-POST', payload: { newPostText } } as const),
    setUserProfile: (profile: ProfileType) => ({ type: 'SET-USER-PROFILE', payload: { profile } } as const),
    setStatus: (status: string) => ({ type: 'SET-STATUS', payload: { status } } as const),
 }
 
-export const thunks = {
-   getUserProfile(userID: number) {
-      return (dispatch: Dispatch) => {
+export const profileThunks = {
+   getUserProfile(userID: number): AppThunkType {
+      return dispatch => {
          profileAPI.getProfile(userID)
             .then(response => {
-               dispatch(actions.setUserProfile(response.data))
+               dispatch(profileActions.setUserProfile(response.data))
             })
       }
    },
-   getStatus(userID: number) {
-      return (dispatch: Dispatch) => {
+   getStatus(userID: number): AppThunkType {
+      return dispatch => {
          profileAPI.getStatus(userID)
             .then(response => {
-               dispatch(actions.setStatus(response.data))
+               dispatch(profileActions.setStatus(response.data))
             })
       }
    },
-   updateStatus(status: string) {
-      return (dispatch: Dispatch) => {
+   updateStatus(status: string): AppThunkType {
+      return dispatch => {
          profileAPI.updateStatus(status)
             .then(response => {
                if (response.data.resultCode === APIResultCodes.SUCCESS) {
-                  dispatch(actions.setStatus(status))
+                  dispatch(profileActions.setStatus(status))
                }
             })
       }
    },
 }
 
-type ActionsType = InferActionTypes<typeof actions>
+type ActionsType = InferActionTypes<typeof profileActions>
 
 type InitialStateType = typeof initialState
 
-export type UpdateStatusType = typeof thunks['updateStatus']
+export type UpdateStatusType = typeof profileThunks['updateStatus']
